@@ -1,4 +1,4 @@
-package ru.native_speakers.dto;
+package ru.native_speakers.cinema_expert_api.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

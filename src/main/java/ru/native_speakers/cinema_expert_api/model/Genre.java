@@ -1,4 +1,4 @@
-package ru.native_speakers.model;
+package ru.native_speakers.cinema_expert_api.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
