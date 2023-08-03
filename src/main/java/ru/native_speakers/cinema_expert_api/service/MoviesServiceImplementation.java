@@ -24,22 +24,17 @@ public class MoviesServiceImplementation implements MoviesService {
 
     @Override
     public List<Movie> findAllOrderByRating(int count) {
-        return moviesRepository.findAllByOrderByChartRatingDescLimit(count);
-    }
-
-    @Override
-    public List<Movie> findAllOrderByRating() {
-        return moviesRepository.findAllByOrderByChartRatingDesc();
+        return moviesRepository.findByOrderByChartRatingDesc(count);
     }
 
     @Override
     public List<Movie> findTopByGenreName(int count, String genreName) {
-        return null;
+        return moviesRepository.findByGenreName(genreName, count);
     }
 
     @Override
     public List<Movie> findTopByGenreId(int count, int genreId) {
-        return null;
+        return moviesRepository.findByGenreId(genreId, count);
     }
 
     @Override
@@ -59,30 +54,18 @@ public class MoviesServiceImplementation implements MoviesService {
 
     @Override
     public MovieDTO convertMovieToMovieDTO(Movie movie) {
-        return modelMapper.map(movie, MovieDTO.class);
+        MovieDTO movieDTO = modelMapper.map(movie, MovieDTO.class);
+        movie.getDirectors().forEach(director -> movieDTO.addDirectorId(director.getId()));
+        movie.getWriters().forEach(writer -> movieDTO.addWriterId(writer.getId()));
+        movie.getActors().forEach(actor -> movieDTO.addActorId(actor.getId()));
+        movie.getCharacters().forEach(character -> movieDTO.addCharacterId(character.getId()));
+        return movieDTO;
     }
 
     @Override
     public List<MovieDTO> convertMovieToMovieDTO(List<Movie> movies) {
-        System.out.println("123");
         List<MovieDTO> movieDTOS = new ArrayList<>();
-        movies.forEach(movie -> {
-            System.out.println("before add");
-            movieDTOS.add(convertMovieToMovieDTO(movie));
-            System.out.println("after add");
-        });
+        movies.forEach(movie -> movieDTOS.add(convertMovieToMovieDTO(movie)));
         return movieDTOS;
-    }
-
-    @Override
-    public Movie convertMovieDTOToMovie(MovieDTO movieDTO) {
-        return modelMapper.map(movieDTO, Movie.class);
-    }
-
-    @Override
-    public List<Movie> convertMovieDTOToMovie(List<MovieDTO> movieDTOS) {
-        List<Movie> movies = new ArrayList<>();
-        movieDTOS.forEach(movieDTO -> movies.add(convertMovieDTOToMovie(movieDTO)));
-        return movies;
     }
 }

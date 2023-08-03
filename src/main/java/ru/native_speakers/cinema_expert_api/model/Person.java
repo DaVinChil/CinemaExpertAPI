@@ -39,6 +39,7 @@ public class Person {
 
     @Column(name = "height")
     private double height;
+
     @Column(name = "birthday")
     @Temporal(TemporalType.DATE)
     private Date birthday;

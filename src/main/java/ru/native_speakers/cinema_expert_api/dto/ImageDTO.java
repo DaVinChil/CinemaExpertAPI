@@ -12,6 +12,9 @@ import org.hibernate.validator.constraints.URL;
 @NoArgsConstructor
 public class ImageDTO {
 
+    @NotNull(message = "Image's id should not be bull")
+    private int id;
+
     @NotNull(message = "Image's height should not be null")
     private int height;
 

@@ -11,13 +11,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CharacterDTO {
 
+    @NotNull(message = "Character's id should not be null")
+    private int id;
+
     @NotNull(message = "Character's name should not be null")
     @NotEmpty(message = "Character's name should not be empty")
     private String name;
 
-    @NotNull(message = "Character's movie should not be null")
-    private MovieDTO movie;
+    @NotNull(message = "Character's movie id should not be null")
+    private int movieId;
 
-    @NotNull(message = "Character's actor should not be null")
-    private PersonDTO actor;
+    @NotNull(message = "Character's actor id should not be null")
+    private int actorId;
 }

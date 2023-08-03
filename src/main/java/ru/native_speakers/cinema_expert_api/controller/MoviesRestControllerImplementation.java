@@ -17,16 +17,18 @@ public class MoviesRestControllerImplementation implements MoviesController {
     }
 
     @Override
-    public List<MovieDTO> getTopRatedMovies(String count) {
-        if (count != null) {
-            return moviesService.convertMovieToMovieDTO(moviesService.findAllOrderByRating(Integer.parseInt(count)));
-        }
-        return moviesService.convertMovieToMovieDTO(moviesService.findAllOrderByRating());
+    public List<MovieDTO> getTopRatedMovies(int count) {
+        return moviesService.convertMovieToMovieDTO(moviesService.findAllOrderByRating(count));
     }
 
     @Override
-    public List<MovieDTO> getTopMoviesByGenre(String count, String genre) {
-        return null;
+    public List<MovieDTO> getTopMoviesByGenreName(int count, String genre) {
+        return moviesService.convertMovieToMovieDTO(moviesService.findTopByGenreName(count, genre));
+    }
+
+    @Override
+    public List<MovieDTO> getTopMoviesByGenreId(int count, int genreId) {
+        return moviesService.convertMovieToMovieDTO(moviesService.findTopByGenreId(count, genreId));
     }
 
     @Override
@@ -46,6 +48,6 @@ public class MoviesRestControllerImplementation implements MoviesController {
 
     @Override
     public List<MovieDTO> getAllMovies() {
-        return null;
+        return moviesService.convertMovieToMovieDTO(moviesService.findAll());
     }
 }

@@ -12,11 +12,15 @@ import java.util.List;
 public interface MoviesController {
 
     @GetMapping("/top-rated")
-    List<MovieDTO> getTopRatedMovies(@RequestParam(name = "count", required = false) String count);
+    List<MovieDTO> getTopRatedMovies(@RequestParam(name = "count", defaultValue = "100") int count);
 
-    @GetMapping("/top-by-genre")
-    List<MovieDTO> getTopMoviesByGenre(@RequestParam(name = "count", required = false) String count,
+    @GetMapping("/top-by-genre-name")
+    List<MovieDTO> getTopMoviesByGenreName(@RequestParam(name = "count", defaultValue = "100") int count,
                                        @RequestParam(name = "genre") String genre);
+
+    @GetMapping("/top-by-genre-id")
+    List<MovieDTO> getTopMoviesByGenreId(@RequestParam(name = "count", defaultValue = "100") int count,
+                                           @RequestParam(name = "genre") int genre);
 
     @GetMapping("/{movieId}/directors")
     List<PersonDTO> getDirectorsByMovieId(@PathVariable("movieId") int movieId);

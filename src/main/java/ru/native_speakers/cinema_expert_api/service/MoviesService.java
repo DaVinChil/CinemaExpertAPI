@@ -8,7 +8,6 @@ import java.util.List;
 public interface MoviesService {
     List<Movie> findAll();
     List<Movie> findAllOrderByRating(int count);
-    List<Movie> findAllOrderByRating();
     List<Movie> findTopByGenreName(int count, String genreName);
     List<Movie> findTopByGenreId(int count, int genreId);
     List<Person> findDirectorsByMovieId(int movieId);
@@ -16,6 +15,4 @@ public interface MoviesService {
     List<Person> findActorsByMovieId(int movieId);
     MovieDTO convertMovieToMovieDTO(Movie movie);
     List<MovieDTO> convertMovieToMovieDTO(List<Movie> movies);
-    Movie convertMovieDTOToMovie(MovieDTO movieDTO);
-    List<Movie> convertMovieDTOToMovie(List<MovieDTO> movieDTOS);
 }
