@@ -1,6 +1,8 @@
 package ru.native_speakers.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.ArrayList;
@@ -18,6 +20,8 @@ public class Genre {
     private int id;
 
     @Column(name = "name")
+    @NotNull(message = "Genre's name should not be null")
+    @NotEmpty(message = "Genre's name should not be empty")
     private String name;
 
     @ManyToMany(cascade = CascadeType.PERSIST)

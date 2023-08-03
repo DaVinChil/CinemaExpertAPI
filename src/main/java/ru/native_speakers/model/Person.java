@@ -1,6 +1,9 @@
 package ru.native_speakers.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +24,14 @@ public class Person {
     private int id;
 
     @Column(name = "imdb_id")
+    @NotNull(message = "Person's imdb id should not be null")
+    @NotEmpty(message = "Person's imdb id should not be empty")
+    @Pattern(regexp = "nm\\d{7}", message = "Person's imdb id should match: nm1234567")
     private String imdbId;
 
     @Column(name = "full_name")
+    @NotNull(message = "Person's full name should not be null")
+    @NotEmpty(message = "Person's full name should not be empty")
     private String fullName;
 
     @Column(name = "gender")
@@ -50,6 +58,7 @@ public class Person {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "photo_id", referencedColumnName = "image_id")
+    @NotNull(message = "Person's photo should not be null")
     private Image photo;
 
     @OneToMany(mappedBy = "actor", cascade = CascadeType.PERSIST)
