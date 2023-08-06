@@ -6,6 +6,4 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public interface PersonsController {
-    @GetMapping("/actors/by-movie-id")
-
 }
