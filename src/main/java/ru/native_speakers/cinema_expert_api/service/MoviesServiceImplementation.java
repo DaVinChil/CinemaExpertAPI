@@ -1,25 +1,32 @@
 package ru.native_speakers.cinema_expert_api.service;
 
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import ru.native_speakers.cinema_expert_api.dto.MovieDTO;
 import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.model.Person;
 import ru.native_speakers.cinema_expert_api.repository.MoviesRepository;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class MoviesServiceImplementation implements MoviesService {
 
     private final MoviesRepository moviesRepository;
-    private final ModelMapper modelMapper;
 
     @Override
-    public List<Movie> findAll() {
-        return moviesRepository.findAll();
+    public Optional<Movie> findMovieByMovieId(int movieId) {
+        return moviesRepository.findById(movieId);
+    }
+
+    @Override
+    public Optional<Movie> findMovieByMovieTitle(String movieTitle) {
+        return moviesRepository.findByTitle(movieTitle);
+    }
+
+    @Override
+    public List<Movie> findMoviesByMoviesTitleContaining(String movieTitle) {
+        return moviesRepository.findAllByTitleContaining(movieTitle);
     }
 
     @Override
@@ -50,22 +57,5 @@ public class MoviesServiceImplementation implements MoviesService {
     @Override
     public List<Person> findActorsByMovieId(int movieId) {
         return null;
-    }
-
-    @Override
-    public MovieDTO convertMovieToMovieDTO(Movie movie) {
-        MovieDTO movieDTO = modelMapper.map(movie, MovieDTO.class);
-        movie.getDirectors().forEach(director -> movieDTO.addDirectorId(director.getId()));
-        movie.getWriters().forEach(writer -> movieDTO.addWriterId(writer.getId()));
-        movie.getActors().forEach(actor -> movieDTO.addActorId(actor.getId()));
-        movie.getCharacters().forEach(character -> movieDTO.addCharacterId(character.getId()));
-        return movieDTO;
-    }
-
-    @Override
-    public List<MovieDTO> convertMovieToMovieDTO(List<Movie> movies) {
-        List<MovieDTO> movieDTOS = new ArrayList<>();
-        movies.forEach(movie -> movieDTOS.add(convertMovieToMovieDTO(movie)));
-        return movieDTOS;
     }
 }

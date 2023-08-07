@@ -7,9 +7,13 @@ import org.springframework.stereotype.Repository;
 import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.model.Person;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MoviesRepository extends JpaRepository<Movie, Integer> {
+
+    Optional<Movie> findByTitle(String title);
+    List<Movie> findAllByTitleContaining(String movieTitle);
 
     @Query(
             value = "select * from movies order by chart_rating desc limit :count",
