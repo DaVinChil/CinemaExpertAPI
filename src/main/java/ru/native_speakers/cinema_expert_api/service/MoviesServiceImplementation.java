@@ -2,6 +2,7 @@ package ru.native_speakers.cinema_expert_api.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.repository.MoviesRepository;
 import java.util.List;
@@ -14,18 +15,30 @@ public class MoviesServiceImplementation implements MoviesService {
     private final MoviesRepository moviesRepository;
 
     @Override
-    public Optional<Movie> findMovieByMovieId(int movieId) {
-        return moviesRepository.findById(movieId);
+    public Movie findMovieByMovieId(int movieId) throws EntityNotFoundException {
+        Optional<Movie> optionalMovie = moviesRepository.findById(movieId);
+        if (optionalMovie.isEmpty()) {
+            throw new EntityNotFoundException("Movie with this id not found");
+        }
+        return optionalMovie.get();
     }
 
     @Override
-    public Optional<Movie> findMovieByMovieTitle(String movieTitle) {
-        return moviesRepository.findByTitle(movieTitle);
+    public Movie findMovieByMovieTitle(String movieTitle) throws EntityNotFoundException {
+        Optional<Movie> optionalMovie = moviesRepository.findByTitle(movieTitle);
+        if (optionalMovie.isEmpty()) {
+            throw new EntityNotFoundException("Movie with this title not found");
+        }
+        return optionalMovie.get();
     }
 
     @Override
-    public List<Movie> findMoviesByMoviesTitleContaining(String movieTitle) {
-        return moviesRepository.findAllByTitleContaining(movieTitle);
+    public List<Movie> findMoviesByMoviesTitleContaining(String movieTitle) throws EntityNotFoundException {
+        List<Movie> movies = moviesRepository.findAllByTitleContaining(movieTitle);
+        if (movies.isEmpty()) {
+            throw new EntityNotFoundException("Movies not found");
+        }
+        return movies;
     }
 
     @Override
@@ -34,12 +47,20 @@ public class MoviesServiceImplementation implements MoviesService {
     }
 
     @Override
-    public List<Movie> findTopByGenreName(int count, String genreName) {
-        return moviesRepository.findByGenreName(genreName, count);
+    public List<Movie> findTopByGenreName(int count, String genreName) throws EntityNotFoundException {
+        List<Movie> movies = moviesRepository.findByGenreName(genreName, count);
+        if (movies.isEmpty()) {
+            throw new EntityNotFoundException("Movies by this genre not found");
+        }
+        return movies;
     }
 
     @Override
-    public List<Movie> findTopByGenreId(int count, int genreId) {
-        return moviesRepository.findByGenreId(genreId, count);
+    public List<Movie> findTopByGenreId(int count, int genreId) throws EntityNotFoundException {
+        List<Movie> movies = moviesRepository.findByGenreId(genreId, count);
+        if (movies.isEmpty()) {
+            throw new EntityNotFoundException("Movies by this genre id not found");
+        }
+        return movies;
     }
 }

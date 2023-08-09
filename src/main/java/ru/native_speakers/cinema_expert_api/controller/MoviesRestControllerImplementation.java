@@ -3,18 +3,14 @@ package ru.native_speakers.cinema_expert_api.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
-import ru.native_speakers.cinema_expert_api.dto.HttpEntityExceptionResponse;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
 import ru.native_speakers.cinema_expert_api.dto.MovieDTO;
 import ru.native_speakers.cinema_expert_api.dto.PersonDTO;
 import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.service.MoviesService;
-import ru.native_speakers.cinema_expert_api.util.movie.MovieNotFoundException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class MoviesRestControllerImplementation implements MoviesController {
@@ -30,22 +26,12 @@ public class MoviesRestControllerImplementation implements MoviesController {
 
     @Override
     public HttpEntityResponse<MovieDTO> getMovieByMovieId(int movieId) {
-        Optional<Movie> movieOptional = moviesService.findMovieByMovieId(movieId);
-        if (movieOptional.isPresent()) {
-            return new HttpEntityResponse<>(convertMovieToMovieDTO(List.of(movieOptional.get())));
-        } else {
-            throw new MovieNotFoundException("Movie with this id not found");
-        }
+        return new HttpEntityResponse<>(List.of(convertMovieToMovieDTO(moviesService.findMovieByMovieId(movieId))));
     }
 
     @Override
     public HttpEntityResponse<MovieDTO> getMovieByMovieTitle(String movieTitle) {
-        Optional<Movie> movieOptional = moviesService.findMovieByMovieTitle(movieTitle);
-        if (movieOptional.isPresent()) {
-            return new HttpEntityResponse<>(convertMovieToMovieDTO(List.of(movieOptional.get())));
-        } else {
-            throw new MovieNotFoundException("Movie with this title not found");
-        }
+        return new HttpEntityResponse<>(List.of(convertMovieToMovieDTO(moviesService.findMovieByMovieTitle(movieTitle))));
     }
 
     @Override
@@ -59,7 +45,7 @@ public class MoviesRestControllerImplementation implements MoviesController {
     }
 
     @Override
-    public HttpEntityResponse<MovieDTO> getTopMoviesByGenreName(int count, String genre) {
+    public HttpEntityResponse<MovieDTO> getTopMoviesByGenreName(String genre, int count) {
         return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreName(count, genre)));
     }
 
@@ -98,10 +84,5 @@ public class MoviesRestControllerImplementation implements MoviesController {
         List<MovieDTO> movieDTOS = new ArrayList<>();
         movies.forEach(movie -> movieDTOS.add(convertMovieToMovieDTO(movie)));
         return movieDTOS;
-    }
-
-    @Override
-    public HttpEntityExceptionResponse handleMovieNotFoundException(MovieNotFoundException e) {
-        return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
     }
 }
