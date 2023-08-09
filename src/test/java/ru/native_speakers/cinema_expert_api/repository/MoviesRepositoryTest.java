@@ -13,8 +13,36 @@ import java.util.List;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class MoviesRepositoryTest {
 
+    private final MoviesRepository moviesRepository;
+
     @Autowired
-    private MoviesRepository moviesRepository;
+    public MoviesRepositoryTest(MoviesRepository moviesRepository) {
+        this.moviesRepository = moviesRepository;
+    }
+
+    @Test
+    void findByTitle_OptionalIsPresentIfMovieWithThisTitleExists() {
+        String movieTitle = "Inception";
+        assertTrue(moviesRepository.findByTitle(movieTitle).isPresent());
+    }
+
+    @Test
+    void findByTitle_OptionalIsEmptyIfMovieWithThisTitleNotExists() {
+        String movieTitle = "Wrong movie title";
+        assertTrue(moviesRepository.findByTitle(movieTitle).isEmpty());
+    }
+
+    @Test
+    void findAllByTitleContaining_ResultListIsNotEmptyIfThereAreMoviesContainsThisTitle() {
+        String movieTitle = "The Lord of The Rings";
+        assertNotEquals(0, moviesRepository.findAllByTitleContaining(movieTitle).size());
+    }
+
+    @Test
+    void findAllByTitleContaining_ResultListIsEmptyIfThereIsNotAnyMovieTitleContainsThisString() {
+        String movieTitle = "There are no movies contains this title";
+        assertEquals(0, moviesRepository.findAllByTitleContaining(movieTitle).size());
+    }
 
     @Test
     void findByOrderByChartRatingDesc_ExactSizeReturnTest() {
@@ -56,5 +84,4 @@ class MoviesRepositoryTest {
             assertThat(movie.getGenres()).anySatisfy(genre -> Integer.compare(genre.getId(), genreId));
         }
     }
-
 }

@@ -12,7 +12,4 @@ public interface MoviesService {
     List<Movie> findAllOrderByRating(int count);
     List<Movie> findTopByGenreName(int count, String genreName);
     List<Movie> findTopByGenreId(int count, int genreId);
-    List<Person> findDirectorsByMovieId(int movieId);
-    List<Person> findWritersByMovieId(int movieId);
-    List<Person> findActorsByMovieId(int movieId);
 }
