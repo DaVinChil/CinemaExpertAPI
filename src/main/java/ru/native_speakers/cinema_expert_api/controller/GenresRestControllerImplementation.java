@@ -4,13 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.GenreDTO;
+import ru.native_speakers.cinema_expert_api.dto.HttpEntityExceptionResponse;
+import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
 import ru.native_speakers.cinema_expert_api.model.Genre;
 import ru.native_speakers.cinema_expert_api.service.GenresService;
 import ru.native_speakers.cinema_expert_api.util.genre.GenreNotFoundException;
-import ru.native_speakers.cinema_expert_api.util.genre.GenreNotFoundResponse;
 import ru.native_speakers.cinema_expert_api.util.genre.InvalidQueryParametersException;
-import ru.native_speakers.cinema_expert_api.util.genre.InvalidQueryParametersResponse;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,18 +28,18 @@ public class GenresRestControllerImplementation implements GenresController {
     }
 
     @Override
-    public List<GenreDTO> getGenres(int count) {
+    public HttpEntityResponse<GenreDTO> getGenres(int count) {
         if (count < 0) {
             throw new InvalidQueryParametersException("Parameter 'count' cannot be negative");
         }
-        return convertGenreToGenreDTO(genresService.findGenres(count));
+        return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenres(count)));
     }
 
     @Override
-    public GenreDTO getGenreById(int genreId) {
+    public HttpEntityResponse<GenreDTO> getGenreById(int genreId) {
         Optional<Genre> genreOptional = genresService.findGenreById(genreId);
         if (genreOptional.isPresent()) {
-            return convertGenreToGenreDTO(genreOptional.get());
+            return new HttpEntityResponse<>(convertGenreToGenreDTO(List.of(genreOptional.get())));
         } else {
             throw new GenreNotFoundException("Genre with this id not found");
         }
@@ -57,12 +58,12 @@ public class GenresRestControllerImplementation implements GenresController {
     }
 
     @Override
-    public GenreNotFoundResponse handleGenreNotFoundException(GenreNotFoundException e) {
-        return new GenreNotFoundResponse(e.getMessage());
+    public HttpEntityExceptionResponse handleGenreNotFoundException(GenreNotFoundException e) {
+        return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
     }
 
     @Override
-    public InvalidQueryParametersResponse handleInvalidQueryParametersException(InvalidQueryParametersException e) {
-        return new InvalidQueryParametersResponse(e.getMessage());
+    public HttpEntityExceptionResponse handleInvalidQueryParametersException(InvalidQueryParametersException e) {
+        return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
     }
 }
