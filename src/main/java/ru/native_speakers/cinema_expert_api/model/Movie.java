@@ -1,6 +1,7 @@
 package ru.native_speakers.cinema_expert_api.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -23,14 +24,12 @@ public class Movie {
     private int id;
 
     @Column(name = "imdb_id")
-    @NotNull(message = "Movie's imdb id should not be null")
-    @NotEmpty(message = "Movie's imdb id should not be empty")
+    @NotBlank(message = "Movie's imdb id should contains at least one character")
     @Pattern(regexp = "tt\\d{7}", message = "Movie's imdb id should be match: tt1234567")
     private String imdbId;
 
     @Column(name = "title")
-    @NotNull(message = "Movie's title should not be null")
-    @NotEmpty(message = "Movie's title should not be empty")
+    @NotBlank(message = "Movie's title should contains at least one character")
     private String title;
 
     @Column(name = "description")
@@ -60,7 +59,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "person_id")
     )
-    @NotNull(message = "Movie's directors should not be null")
+    @NotEmpty(message = "Movie's directors should contains at least one director")
     private List<Person> directors;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -69,7 +68,7 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "person_id")
     )
-    @NotNull(message = "Movie's writers should not be null")
+    @NotEmpty(message = "Movie's writers should contains at least one writer")
     private List<Person> writers;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
@@ -78,15 +77,15 @@ public class Movie {
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "person_id")
     )
-    @NotNull(message = "Movie's actors should not be null")
+    @NotEmpty(message = "Movie's actors should contains at least one actor")
     private List<Person> actors;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.PERSIST)
-    @NotNull(message = "Movie's characters should not be null")
+    @NotEmpty(message = "Movie's characters should contains at least one character")
     private List<Character> characters;
 
     @ManyToMany(mappedBy = "movies", cascade = CascadeType.PERSIST)
-    @NotNull(message = "Movie's genres should not be null")
+    @NotEmpty(message = "Movie's genres should contains at least one genre")
     private List<Genre> genres;
 
     public void addGenre(Genre genre) {

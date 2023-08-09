@@ -1,5 +1,6 @@
 package ru.native_speakers.cinema_expert_api.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -17,13 +18,11 @@ public class MovieDTO {
     @NotNull(message = "MovieDTO id should not be null")
     private int id;
 
-    @NotNull(message = "Movie's imdb id should not be null")
-    @NotEmpty(message = "Movie's imdb id should not be empty")
+    @NotBlank(message = "Movie's imdb id should contains at least one character")
     @Pattern(regexp = "tt\\d{7}", message = "Movie's imdb id should be match: tt1234567")
     private String imdbId;
 
-    @NotNull(message = "Movie's title should not be null")
-    @NotEmpty(message = "Movie's title should not be empty")
+    @NotBlank(message = "Movie's title should contains at least one character")
     private String title;
 
     @NotNull(message = "Movie's description should not be null")
@@ -41,19 +40,19 @@ public class MovieDTO {
     @NotNull(message = "Movie's image should not be null")
     private ImageDTO image;
 
-    @NotNull(message = "Movie's directors id should not be null")
+    @NotEmpty(message = "Movie's director's id should contains at least one director id")
     private List<Integer> directorsId;
 
-    @NotNull(message = "Movie's writers id should not be null")
+    @NotEmpty(message = "Movie's writer's id should contains at least one writer id")
     private List<Integer> writersId;
 
-    @NotNull(message = "Movie's actors id should not be null")
+    @NotEmpty(message = "Movie's actor's id should contains at least one actor's id")
     private List<Integer> actorsId;
 
-    @NotNull(message = "Movie's characters id should not be null")
+    @NotEmpty(message = "Movie's character's id should contains at least one character's id")
     private List<Integer> charactersId;
 
-    @NotNull(message = "Movie's genres should not be null")
+    @NotEmpty(message = "Movie's genre's id should contains at least one genre's id")
     private List<GenreDTO> genres;
 
     public void addDirectorId(int directorId) {

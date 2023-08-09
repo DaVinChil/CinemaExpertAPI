@@ -1,7 +1,7 @@
 package ru.native_speakers.cinema_expert_api.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -24,14 +24,12 @@ public class Person {
     private int id;
 
     @Column(name = "imdb_id")
-    @NotNull(message = "Person's imdb id should not be null")
-    @NotEmpty(message = "Person's imdb id should not be empty")
+    @NotBlank(message = "Person's imdb id should contains at least one character")
     @Pattern(regexp = "nm\\d{7}", message = "Person's imdb id should match: nm1234567")
     private String imdbId;
 
     @Column(name = "full_name")
-    @NotNull(message = "Person's full name should not be null")
-    @NotEmpty(message = "Person's full name should not be empty")
+    @NotBlank(message = "Person's full name should contains at least one character")
     private String fullName;
 
     @Column(name = "gender")
