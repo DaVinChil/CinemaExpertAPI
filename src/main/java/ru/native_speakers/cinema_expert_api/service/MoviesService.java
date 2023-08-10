@@ -8,6 +8,6 @@ public interface MoviesService {
     Movie findMovieByMovieTitle(String movieTitle);
     List<Movie> findMoviesByMoviesTitleContaining(String movieTitle);
     List<Movie> findAllOrderByRating(int count);
-    List<Movie> findTopByGenreName(int count, String genreName);
-    List<Movie> findTopByGenreId(int count, int genreId);
+    List<Movie> findTopByGenreName(String genreName, int count);
+    List<Movie> findTopByGenreId(int genreId, int count);
 }

@@ -46,12 +46,12 @@ public class MoviesRestControllerImplementation implements MoviesController {
 
     @Override
     public HttpEntityResponse<MovieDTO> getTopMoviesByGenreName(String genre, int count) {
-        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreName(count, genre)));
+        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreName(genre, count)));
     }
 
     @Override
-    public HttpEntityResponse<MovieDTO> getTopMoviesByGenreId(int count, int genreId) {
-        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreId(count, genreId)));
+    public HttpEntityResponse<MovieDTO> getTopMoviesByGenreId(int genreId, int count) {
+        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreId(genreId, count)));
     }
 
     @Override
