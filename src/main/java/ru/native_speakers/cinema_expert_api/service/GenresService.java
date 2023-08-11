@@ -7,4 +7,5 @@ import java.util.List;
 public interface GenresService {
     List<Genre> findGenres(int count);
     Genre findGenreById(int genreId) throws EntityNotFoundException;
+    long getGenresCount();
 }

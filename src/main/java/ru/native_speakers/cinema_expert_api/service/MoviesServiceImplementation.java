@@ -63,4 +63,9 @@ public class MoviesServiceImplementation implements MoviesService {
         }
         return movies;
     }
+
+    @Override
+    public long getMoviesCount() {
+        return moviesRepository.count();
+    }
 }

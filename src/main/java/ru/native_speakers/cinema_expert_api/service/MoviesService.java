@@ -10,4 +10,5 @@ public interface MoviesService {
     List<Movie> findAllOrderByRating(int count);
     List<Movie> findTopByGenreName(String genreName, int count);
     List<Movie> findTopByGenreId(int genreId, int count);
+    long getMoviesCount();
 }

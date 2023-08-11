@@ -28,4 +28,9 @@ public class ImagesServiceImplementation implements ImagesService {
     public List<Image> findImages(int count) {
         return imagesRepository.findAll(count);
     }
+
+    @Override
+    public long getImagesCount() {
+        return imagesRepository.count();
+    }
 }

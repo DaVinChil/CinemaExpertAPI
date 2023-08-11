@@ -27,4 +27,9 @@ public class GenresServiceImplementation implements GenresService {
         }
         return optionalGenre.get();
     }
+
+    @Override
+    public long getGenresCount() {
+        return genresRepository.count();
+    }
 }

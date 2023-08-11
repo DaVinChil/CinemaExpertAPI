@@ -7,4 +7,5 @@ import java.util.List;
 public interface ImagesService {
     Image findImageByImageId(int imageId);
     List<Image> findImages(int count);
+    long getImagesCount();
 }
