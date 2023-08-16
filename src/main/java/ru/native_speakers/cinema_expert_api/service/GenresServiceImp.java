@@ -7,7 +7,6 @@ import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Genre;
 import ru.native_speakers.cinema_expert_api.repository.GenresRepository;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,11 +25,7 @@ public class GenresServiceImp implements GenresService {
 
     @Override
     public Genre findGenreById(int genreId) {
-        Optional<Genre> optionalGenre = genresRepository.findById(genreId);
-        if (optionalGenre.isEmpty()) {
-            throw new EntityNotFoundException("Genre with this id not found");
-        }
-        return optionalGenre.get();
+        return genresRepository.findById(genreId).orElseThrow(() -> new EntityNotFoundException("Genre with this id not found"));
     }
 
     @Override

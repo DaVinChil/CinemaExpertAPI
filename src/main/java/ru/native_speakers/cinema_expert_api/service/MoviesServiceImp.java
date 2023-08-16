@@ -8,7 +8,6 @@ import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.repository.MoviesRepository;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,20 +17,12 @@ public class MoviesServiceImp implements MoviesService {
 
     @Override
     public Movie findMovieByMovieId(int movieId) throws EntityNotFoundException {
-        Optional<Movie> optionalMovie = moviesRepository.findById(movieId);
-        if (optionalMovie.isEmpty()) {
-            throw new EntityNotFoundException("Movie with this id not found");
-        }
-        return optionalMovie.get();
+        return moviesRepository.findById(movieId).orElseThrow(() -> new EntityNotFoundException("Movie with this id not found"));
     }
 
     @Override
     public Movie findMovieByMovieTitle(String movieTitle) throws EntityNotFoundException {
-        Optional<Movie> optionalMovie = moviesRepository.findByTitle(movieTitle);
-        if (optionalMovie.isEmpty()) {
-            throw new EntityNotFoundException("Movie with this title not found");
-        }
-        return optionalMovie.get();
+        return moviesRepository.findByTitle(movieTitle).orElseThrow(() -> new EntityNotFoundException("Movie with this title not found"));
     }
 
     @Override
