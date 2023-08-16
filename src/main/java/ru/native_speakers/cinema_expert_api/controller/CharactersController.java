@@ -8,10 +8,10 @@ import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
 
 import java.util.List;
 
-@RequestMapping("/character")
+@RequestMapping("/characters")
 public interface CharactersController {
-    @GetMapping("/character-by-id/{id}")
+    @GetMapping("/by-id/{id}")
     HttpEntityResponse<CharacterDTO> getCharacterById(@PathVariable("id") int characterId);
-    @GetMapping("/character-by-name/{name}")
+    @GetMapping("/by-name/{name}")
     HttpEntityResponse<List<CharacterDTO>> getCharactersByName(@PathVariable("name") String characterName);
 }
