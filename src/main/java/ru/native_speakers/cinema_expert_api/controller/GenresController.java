@@ -14,7 +14,7 @@ import java.util.List;
 public interface GenresController {
 
     @GetMapping
-    HttpEntityResponse<GenreDTO> getGenres(@RequestParam(name = "count", defaultValue = "20")
+    HttpEntityResponse<List<GenreDTO>> getGenres(@RequestParam(name = "count", defaultValue = "20")
                                            @Min(value = 1, message = "Parameter 'count' cannot be less than 1")
                                            int count);
 
