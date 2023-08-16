@@ -17,14 +17,14 @@ public interface MoviesRepository extends JpaRepository<Movie, Integer> {
     Page<Movie> findByOrderByChartRatingDesc(Pageable pageable);
 
     @Query(
-            value = "select movies.* from movies join movies_genres on movies.movie_id = movies_genres.movie_id join genres on genres.genre_id = movies_genres.genre_id where lower(genres.name) = lower(:genreName)",
+            value = "select movies.* from movies join movies_genres on movies.movie_id = movies_genres.movie_id join genres on genres.genre_id = movies_genres.genre_id where lower(genres.name) = lower(:genreName) order by movies.chart_rating desc",
             countQuery = "select count(*) from movies join movies_genres on movies.movie_id = movies_genres.movie_id join genres on genres.genre_id = movies_genres.genre_id where lower(genres.name) = lower(:genreName)",
             nativeQuery = true
     )
     Page<Movie> findAllByGenreName(@Param("genreName") String genreName, Pageable pageable);
 
     @Query(
-            value = "select movies.* from movies join movies_genres on movies.movie_id = movies_genres.movie_id join genres on genres.genre_id = movies_genres.genre_id where genres.genre_id = :genreId",
+            value = "select movies.* from movies join movies_genres on movies.movie_id = movies_genres.movie_id join genres on genres.genre_id = movies_genres.genre_id where genres.genre_id = :genreId order by movies.chart_rating desc",
             countQuery = "select count(*) from movies join movies_genres on movies.movie_id = movies_genres.movie_id join genres on genres.genre_id = movies_genres.genre_id where genres.genre_id = :genreId",
             nativeQuery = true
     )

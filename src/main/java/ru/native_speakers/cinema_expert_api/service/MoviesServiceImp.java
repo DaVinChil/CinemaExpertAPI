@@ -41,8 +41,7 @@ public class MoviesServiceImp implements MoviesService {
 
     @Override
     public List<Movie> findTopByGenreName(String genreName, int pageSize, int page) throws EntityNotFoundException {
-        List<Movie> movies = moviesRepository.findAllByGenreName(genreName,
-                PageRequest.of(page, pageSize, Sort.by("chartRating").descending())).getContent();
+        List<Movie> movies = moviesRepository.findAllByGenreName(genreName, PageRequest.of(page, pageSize)).getContent();
         if (movies.isEmpty()) {
             throw new EntityNotFoundException("Movies by this genre not found");
         }
@@ -51,8 +50,7 @@ public class MoviesServiceImp implements MoviesService {
 
     @Override
     public List<Movie> findTopByGenreId(int genreId, int pageSize, int page) throws EntityNotFoundException {
-        List<Movie> movies = moviesRepository.findAllByGenreId(genreId,
-                PageRequest.of(page, pageSize, Sort.by("chartRating"))).getContent();
+        List<Movie> movies = moviesRepository.findAllByGenreId(genreId, PageRequest.of(page, pageSize)).getContent();
         if (movies.isEmpty()) {
             throw new EntityNotFoundException("Movies by this genre id not found");
         }
