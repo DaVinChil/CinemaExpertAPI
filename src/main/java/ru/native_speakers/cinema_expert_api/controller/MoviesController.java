@@ -19,10 +19,10 @@ public interface MoviesController {
                                                    @Min(value = 1, message = "Movie id cannot be less that 1")
                                                    int movieId);
 
-    @GetMapping("/find-by-title/{title}")
+    @GetMapping("/by-title/{title}")
     HttpEntityResponse<MovieDTO> getMovieByMovieTitle(@PathVariable(name = "title") String movieTitle);
 
-    @GetMapping("/find-by-title-containing/{title}")
+    @GetMapping("/by-title-containing/{title}")
     HttpEntityResponse<List<MovieDTO>> getMoviesByMoviesTitleContaining(@PathVariable(name = "title") String movieTitle,
                                                                   @RequestParam(name = "page_size")
                                                                   @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
