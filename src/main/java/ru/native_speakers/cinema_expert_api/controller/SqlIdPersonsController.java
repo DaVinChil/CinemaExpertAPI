@@ -1,10 +1,8 @@
 package ru.native_speakers.cinema_expert_api.controller;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.persons.MovieByPerson;
 import ru.native_speakers.cinema_expert_api.dto.persons.PersonDto;
-import ru.native_speakers.cinema_expert_api.service.PersonsService;
 import ru.native_speakers.cinema_expert_api.service.SqlIdPersonsService;
 
 import java.util.List;
