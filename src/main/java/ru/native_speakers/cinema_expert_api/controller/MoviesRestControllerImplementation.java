@@ -35,23 +35,23 @@ public class MoviesRestControllerImplementation implements MoviesController {
     }
 
     @Override
-    public HttpEntityResponse<MovieDTO> getMoviesByMoviesTitleContaining(String movieTitle) {
-        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findMoviesByMoviesTitleContaining(movieTitle)));
+    public HttpEntityResponse<MovieDTO> getMoviesByMoviesTitleContaining(String movieTitle, int pageSize, int page) {
+        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findMoviesByMoviesTitleContaining(movieTitle, pageSize, page)));
     }
 
     @Override
-    public HttpEntityResponse<MovieDTO> getTopRatedMovies(int count) {
-        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findAllOrderByRating(count)));
+    public HttpEntityResponse<MovieDTO> getTopRatedMovies(int pageSize, int page) {
+        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findAllOrderByRating(pageSize, page)));
     }
 
     @Override
-    public HttpEntityResponse<MovieDTO> getTopMoviesByGenreName(String genre, int count) {
-        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreName(genre, count)));
+    public HttpEntityResponse<MovieDTO> getTopMoviesByGenreName(String genre, int pageSize, int page) {
+        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreName(genre, pageSize, page)));
     }
 
     @Override
-    public HttpEntityResponse<MovieDTO> getTopMoviesByGenreId(int genreId, int count) {
-        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreId(genreId, count)));
+    public HttpEntityResponse<MovieDTO> getTopMoviesByGenreId(int genreId, int pageSize, int page) {
+        return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreId(genreId, pageSize, page)));
     }
 
     @Override

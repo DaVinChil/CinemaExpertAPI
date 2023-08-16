@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ImagesService {
     Image findImageByImageId(int imageId);
-    List<Image> findImages(int count);
+    List<Image> findImages(int pageSize, int page);
     long getImagesCount();
 }

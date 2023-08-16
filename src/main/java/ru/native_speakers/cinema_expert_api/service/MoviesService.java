@@ -6,9 +6,9 @@ import java.util.List;
 public interface MoviesService {
     Movie findMovieByMovieId(int movieId);
     Movie findMovieByMovieTitle(String movieTitle);
-    List<Movie> findMoviesByMoviesTitleContaining(String movieTitle);
-    List<Movie> findAllOrderByRating(int count);
-    List<Movie> findTopByGenreName(String genreName, int count);
-    List<Movie> findTopByGenreId(int genreId, int count);
+    List<Movie> findMoviesByMoviesTitleContaining(String movieTitle, int pageSize, int page);
+    List<Movie> findAllOrderByRating(int pageSize, int page);
+    List<Movie> findTopByGenreName(String genreName, int pageSize, int page);
+    List<Movie> findTopByGenreId(int genreId, int pageSize, int page);
     long getMoviesCount();
 }

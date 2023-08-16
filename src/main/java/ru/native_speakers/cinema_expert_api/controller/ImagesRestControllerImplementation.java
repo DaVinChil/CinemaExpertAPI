@@ -29,8 +29,8 @@ public class ImagesRestControllerImplementation implements ImagesController {
     }
 
     @Override
-    public HttpEntityResponse<ImageDTO> getImages(int count) {
-        return new HttpEntityResponse<>(convertImageToImageDTO(imagesService.findImages(count)));
+    public HttpEntityResponse<ImageDTO> getImages(int pageSize, int page) {
+        return new HttpEntityResponse<>(convertImageToImageDTO(imagesService.findImages(pageSize, page)));
     }
 
     @Override

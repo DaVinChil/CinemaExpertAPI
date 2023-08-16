@@ -1,6 +1,7 @@
 package ru.native_speakers.cinema_expert_api.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Image;
@@ -25,8 +26,12 @@ public class ImagesServiceImplementation implements ImagesService {
     }
 
     @Override
-    public List<Image> findImages(int count) {
-        return imagesRepository.findAll(count);
+    public List<Image> findImages(int pageSize, int page) throws EntityNotFoundException {
+        List<Image> images = imagesRepository.findAll(PageRequest.of(page, pageSize)).getContent();
+        if (images.isEmpty()) {
+            throw new EntityNotFoundException("Images not found");
+        }
+        return images;
     }
 
     @Override

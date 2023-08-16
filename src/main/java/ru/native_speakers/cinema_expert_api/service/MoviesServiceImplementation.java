@@ -1,6 +1,8 @@
 package ru.native_speakers.cinema_expert_api.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Movie;
@@ -33,8 +35,8 @@ public class MoviesServiceImplementation implements MoviesService {
     }
 
     @Override
-    public List<Movie> findMoviesByMoviesTitleContaining(String movieTitle) throws EntityNotFoundException {
-        List<Movie> movies = moviesRepository.findAllByTitleContaining(movieTitle);
+    public List<Movie> findMoviesByMoviesTitleContaining(String movieTitle, int pageSize, int page) throws EntityNotFoundException {
+        List<Movie> movies = moviesRepository.findAllByTitleContaining(movieTitle, PageRequest.of(page, pageSize));
         if (movies.isEmpty()) {
             throw new EntityNotFoundException("Movies not found");
         }
@@ -42,13 +44,14 @@ public class MoviesServiceImplementation implements MoviesService {
     }
 
     @Override
-    public List<Movie> findAllOrderByRating(int count) {
-        return moviesRepository.findByOrderByChartRatingDesc(count);
+    public List<Movie> findAllOrderByRating(int pageSize, int page) {
+        return moviesRepository.findByOrderByChartRatingDesc(PageRequest.of(page, pageSize)).getContent();
     }
 
     @Override
-    public List<Movie> findTopByGenreName(String genreName, int count) throws EntityNotFoundException {
-        List<Movie> movies = moviesRepository.findByGenreName(genreName, count);
+    public List<Movie> findTopByGenreName(String genreName, int pageSize, int page) throws EntityNotFoundException {
+        List<Movie> movies = moviesRepository.findAllByGenreName(genreName,
+                PageRequest.of(page, pageSize, Sort.by("chartRating").descending())).getContent();
         if (movies.isEmpty()) {
             throw new EntityNotFoundException("Movies by this genre not found");
         }
@@ -56,8 +59,9 @@ public class MoviesServiceImplementation implements MoviesService {
     }
 
     @Override
-    public List<Movie> findTopByGenreId(int genreId, int count) throws EntityNotFoundException {
-        List<Movie> movies = moviesRepository.findByGenreId(genreId, count);
+    public List<Movie> findTopByGenreId(int genreId, int pageSize, int page) throws EntityNotFoundException {
+        List<Movie> movies = moviesRepository.findAllByGenreId(genreId,
+                PageRequest.of(page, pageSize, Sort.by("chartRating"))).getContent();
         if (movies.isEmpty()) {
             throw new EntityNotFoundException("Movies by this genre id not found");
         }

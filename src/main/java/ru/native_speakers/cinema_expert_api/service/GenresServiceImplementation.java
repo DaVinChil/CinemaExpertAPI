@@ -1,6 +1,7 @@
 package ru.native_speakers.cinema_expert_api.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Genre;
@@ -15,8 +16,12 @@ public class GenresServiceImplementation implements GenresService {
     private final GenresRepository genresRepository;
 
     @Override
-    public List<Genre> findGenres(int count) {
-        return genresRepository.findGenres(count);
+    public List<Genre> findGenres(int pageSize, int page) throws EntityNotFoundException {
+        List<Genre> genres = genresRepository.findAll(PageRequest.of(page, pageSize)).getContent();
+        if (genres.isEmpty()) {
+            throw new EntityNotFoundException("Genres not found");
+        }
+        return genres;
     }
 
     @Override

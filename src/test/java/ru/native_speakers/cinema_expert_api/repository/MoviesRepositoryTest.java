@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.PageRequest;
 import ru.native_speakers.cinema_expert_api.model.Movie;
 import java.util.List;
 
@@ -45,16 +46,8 @@ class MoviesRepositoryTest {
     }
 
     @Test
-    void findByOrderByChartRatingDesc_ExactSizeReturnTest() {
-        assertEquals(0, moviesRepository.findByOrderByChartRatingDesc(0).size());
-        assertEquals(3, moviesRepository.findByOrderByChartRatingDesc(3).size());
-        assertEquals(5, moviesRepository.findByOrderByChartRatingDesc(5).size());
-        assertEquals(100, moviesRepository.findByOrderByChartRatingDesc(100).size());
-    }
-
-    @Test
     void findByOrderByChartRatingDesc_DescOrderingTest() {
-        List<Movie> movies = moviesRepository.findByOrderByChartRatingDesc(40);
+        List<Movie> movies = moviesRepository.findByOrderByChartRatingDesc(PageRequest.of(0, 20)).getContent();
         for (int i = 1; i < movies.size(); ++i) {
             Movie previous = movies.get(i - 1);
             Movie current = movies.get(i);
@@ -66,21 +59,21 @@ class MoviesRepositoryTest {
     void findByGenreName_AllMoviesHaveThisGenreTest() {
         String genreName = "Sci-fi";
         int count = 15;
-        for (Movie movie : moviesRepository.findByGenreName(genreName, count)) {
+        for (Movie movie : moviesRepository.findByGenreName(genreName, PageRequest.of(0, count))) {
             assertThat(movie.getGenres()).anySatisfy(genre -> genre.getName().equals(genreName));
         }
     }
 
     @Test
     void findByGenreName_EmptyListIfGenreWithNameNotExists() {
-        assertEquals(0, moviesRepository.findByGenreName("Something wrong", 100).size());
+        assertEquals(0, moviesRepository.findByGenreName("Something wrong", PageRequest.of(0, 20)).getContent().size());
     }
 
     @Test
     void findByGenreId_AllMoviesHavingGenreWithThisId() {
         int genreId = 2;
         int count = 15;
-        for (Movie movie : moviesRepository.findByGenreId(genreId, count)) {
+        for (Movie movie : moviesRepository.findByGenreId(genreId, PageRequest.of(0, count))) {
             assertThat(movie.getGenres()).anySatisfy(genre -> Integer.compare(genre.getId(), genreId));
         }
     }

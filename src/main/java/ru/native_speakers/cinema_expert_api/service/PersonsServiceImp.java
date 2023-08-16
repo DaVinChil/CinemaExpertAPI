@@ -62,7 +62,7 @@ public class PersonsServiceImp implements PersonsService{
 
     @Override
     public List<Person> getAllActors() {
-        return personsRepository.findAllActors();
+        return null;
     }
 
     @Override

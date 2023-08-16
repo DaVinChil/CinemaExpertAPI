@@ -1,5 +1,6 @@
 package ru.native_speakers.cinema_expert_api.controller;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,13 @@ import java.util.List;
 public interface GenresController {
 
     @GetMapping
-    HttpEntityResponse<GenreDTO> getGenres(@RequestParam(name = "count", defaultValue = "20")
-                                           @Min(value = 1, message = "Parameter 'count' cannot be less than 1")
-                                           int count);
+    HttpEntityResponse<GenreDTO> getGenres(@RequestParam(name = "page_size")
+                                           @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
+                                           @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
+                                           int pageSize,
+                                           @RequestParam(name = "page")
+                                           @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
+                                           int page);
 
     @GetMapping("/{genreId}")
     HttpEntityResponse<GenreDTO> getGenreById(@PathVariable("genreId")
