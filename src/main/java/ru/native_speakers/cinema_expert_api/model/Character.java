@@ -1,7 +1,7 @@
 package ru.native_speakers.cinema_expert_api.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,8 +20,7 @@ public class Character {
     private int id;
 
     @Column(name = "name")
-    @NotNull(message = "Character's name should not be null")
-    @NotEmpty(message = "Character's name should not be empty")
+    @NotBlank(message = "Character's name should contains at least one character")
     private String name;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

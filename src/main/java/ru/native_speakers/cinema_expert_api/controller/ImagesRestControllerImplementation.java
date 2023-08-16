@@ -1,0 +1,47 @@
+package ru.native_speakers.cinema_expert_api.controller;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RestController;
+import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
+import ru.native_speakers.cinema_expert_api.dto.ImageDTO;
+import ru.native_speakers.cinema_expert_api.model.Image;
+import ru.native_speakers.cinema_expert_api.service.ImagesService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
+public class ImagesRestControllerImplementation implements ImagesController {
+
+    private final ImagesService imagesService;
+    private final ModelMapper modelMapper;
+
+    public ImagesRestControllerImplementation(@Qualifier("imagesServiceImplementation") ImagesService imagesService,
+                                              ModelMapper modelMapper) {
+        this.imagesService = imagesService;
+        this.modelMapper = modelMapper;
+    }
+
+    @Override
+    public HttpEntityResponse<ImageDTO> getImageByImageId(int id) {
+        return new HttpEntityResponse<>(List.of(convertImageToImageDTO(imagesService.findImageByImageId(id))));
+    }
+
+    @Override
+    public HttpEntityResponse<ImageDTO> getImages(int count) {
+        return new HttpEntityResponse<>(convertImageToImageDTO(imagesService.findImages(count)));
+    }
+
+    @Override
+    public ImageDTO convertImageToImageDTO(Image image) {
+        return modelMapper.map(image, ImageDTO.class);
+    }
+
+    @Override
+    public List<ImageDTO> convertImageToImageDTO(List<Image> images) {
+        List<ImageDTO> imageDTOS = new ArrayList<>();
+        images.forEach(image -> imageDTOS.add(convertImageToImageDTO(image)));
+        return imageDTOS;
+    }
+}

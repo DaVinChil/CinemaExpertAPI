@@ -1,21 +1,14 @@
 package ru.native_speakers.cinema_expert_api.service;
 
-import ru.native_speakers.cinema_expert_api.dto.MovieDTO;
 import ru.native_speakers.cinema_expert_api.model.Movie;
-import ru.native_speakers.cinema_expert_api.model.Person;
 import java.util.List;
 
 public interface MoviesService {
-    List<Movie> findAll();
+    Movie findMovieByMovieId(int movieId);
+    Movie findMovieByMovieTitle(String movieTitle);
+    List<Movie> findMoviesByMoviesTitleContaining(String movieTitle);
     List<Movie> findAllOrderByRating(int count);
-    List<Movie> findAllOrderByRating();
-    List<Movie> findTopByGenreName(int count, String genreName);
-    List<Movie> findTopByGenreId(int count, int genreId);
-    List<Person> findDirectorsByMovieId(int movieId);
-    List<Person> findWritersByMovieId(int movieId);
-    List<Person> findActorsByMovieId(int movieId);
-    MovieDTO convertMovieToMovieDTO(Movie movie);
-    List<MovieDTO> convertMovieToMovieDTO(List<Movie> movies);
-    Movie convertMovieDTOToMovie(MovieDTO movieDTO);
-    List<Movie> convertMovieDTOToMovie(List<MovieDTO> movieDTOS);
+    List<Movie> findTopByGenreName(String genreName, int count);
+    List<Movie> findTopByGenreId(int genreId, int count);
+    long getMoviesCount();
 }

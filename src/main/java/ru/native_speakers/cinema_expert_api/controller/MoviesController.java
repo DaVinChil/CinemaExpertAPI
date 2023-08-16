@@ -1,32 +1,63 @@
 package ru.native_speakers.cinema_expert_api.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.validation.constraints.Min;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
 import ru.native_speakers.cinema_expert_api.dto.MovieDTO;
 import ru.native_speakers.cinema_expert_api.dto.PersonDTO;
+import ru.native_speakers.cinema_expert_api.model.Movie;
 import java.util.List;
 
 @RequestMapping("/movies")
+@Validated
 public interface MoviesController {
 
-    @GetMapping("/top-rated")
-    List<MovieDTO> getTopRatedMovies(@RequestParam(name = "count", required = false) String count);
+    @GetMapping("/{movieId}")
+    HttpEntityResponse<MovieDTO> getMovieByMovieId(@PathVariable("movieId")
+                                                   @Min(value = 1, message = "Movie id cannot be less that 1")
+                                                   int movieId);
 
-    @GetMapping("/top-by-genre")
-    List<MovieDTO> getTopMoviesByGenre(@RequestParam(name = "count", required = false) String count,
-                                       @RequestParam(name = "genre") String genre);
+    @GetMapping("/find-by-title/{title}")
+    HttpEntityResponse<MovieDTO> getMovieByMovieTitle(@PathVariable(name = "title") String movieTitle);
+
+    @GetMapping("/find-by-title-containing/{title}")
+    HttpEntityResponse<MovieDTO> getMoviesByMoviesTitleContaining(@PathVariable(name = "title") String movieTitle);
+
+    @GetMapping("/top-rated")
+    HttpEntityResponse<MovieDTO> getTopRatedMovies(@RequestParam(name = "count", defaultValue = "100")
+                                                   @Min(value = 1, message = "Parameter 'count' cannot be less than 1")
+                                                   int count);
+
+    @GetMapping("/top-by-genre-name/{genre}")
+    HttpEntityResponse<MovieDTO> getTopMoviesByGenreName(@PathVariable(name = "genre") String genre,
+                                       @RequestParam(name = "count", defaultValue = "100")
+                                       @Min(value = 1, message = "Parameter 'count' cannot be less than 1")
+                                       int count);
+
+    @GetMapping("/top-by-genre-id/{id}")
+    HttpEntityResponse<MovieDTO> getTopMoviesByGenreId(@PathVariable(name = "id")
+                                                       @Min(value = 1, message = "Genre id cannot be less than 1")
+                                                       int genreId,
+                                                       @RequestParam(name = "count", defaultValue = "100")
+                                                       @Min(value = 1, message = "Parameter 'count' cannot be less than 1")
+                                                       int count);
 
     @GetMapping("/{movieId}/directors")
-    List<PersonDTO> getDirectorsByMovieId(@PathVariable("movieId") int movieId);
+    HttpEntityResponse<PersonDTO> getDirectorsByMovieId(@PathVariable("movieId")
+                                                        @Min(value = 1, message = "Movie id cannot be less than 1")
+                                                        int movieId);
 
     @GetMapping("/{movieId}/writers")
-    List<PersonDTO> getWritersByMovieId(@PathVariable("movieId") int movieId);
+    HttpEntityResponse<PersonDTO> getWritersByMovieId(@PathVariable("movieId")
+                                                      @Min(value = 1, message = "Movie id cannot be less than 1")
+                                                      int movieId);
 
     @GetMapping("/{movieId}/actors")
-    List<PersonDTO> getActorsByMovieId(@PathVariable("movieId") int movieId);
+    HttpEntityResponse<PersonDTO> getActorsByMovieId(@PathVariable("movieId")
+                                                     @Min(value = 1, message = "Movie id cannot be less than 1")
+                                                     int movieId);
 
-    @GetMapping
-    List<MovieDTO> getAllMovies();
+    MovieDTO convertMovieToMovieDTO(Movie movie);
+    List<MovieDTO> convertMovieToMovieDTO(List<Movie> movies);
 }

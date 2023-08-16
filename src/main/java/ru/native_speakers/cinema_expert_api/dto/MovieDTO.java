@@ -1,5 +1,6 @@
 package ru.native_speakers.cinema_expert_api.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -14,13 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 public class MovieDTO {
 
-    @NotNull(message = "Movie's imdb id should not be null")
-    @NotEmpty(message = "Movie's imdb id should not be empty")
+    @NotNull(message = "MovieDTO id should not be null")
+    private int id;
+
+    @NotBlank(message = "Movie's imdb id should contains at least one character")
     @Pattern(regexp = "tt\\d{7}", message = "Movie's imdb id should be match: tt1234567")
     private String imdbId;
 
-    @NotNull(message = "Movie's title should not be null")
-    @NotEmpty(message = "Movie's title should not be empty")
+    @NotBlank(message = "Movie's title should contains at least one character")
     private String title;
 
     @NotNull(message = "Movie's description should not be null")
@@ -38,56 +40,46 @@ public class MovieDTO {
     @NotNull(message = "Movie's image should not be null")
     private ImageDTO image;
 
-    @NotNull(message = "Movie's directors should not be null")
-    private List<PersonDTO> directors;
+    @NotEmpty(message = "Movie's director's id should contains at least one director id")
+    private List<Integer> directorsId;
 
-    @NotNull(message = "Movie's writers should not be null")
-    private List<PersonDTO> writers;
+    @NotEmpty(message = "Movie's writer's id should contains at least one writer id")
+    private List<Integer> writersId;
 
-    @NotNull(message = "Movie's actors should not be null")
-    private List<PersonDTO> actors;
+    @NotEmpty(message = "Movie's actor's id should contains at least one actor's id")
+    private List<Integer> actorsId;
 
-    @NotNull(message = "Movie's characters should not be null")
-    private List<CharacterDTO> characters;
+    @NotEmpty(message = "Movie's character's id should contains at least one character's id")
+    private List<Integer> charactersId;
 
-    @NotNull(message = "Movie's genres should not be null")
+    @NotEmpty(message = "Movie's genre's id should contains at least one genre's id")
     private List<GenreDTO> genres;
 
-    public void addGenre(GenreDTO genre) {
-        if(genres == null){
-            genres = new ArrayList<>();
+    public void addDirectorId(int directorId) {
+        if (directorsId == null) {
+            directorsId = new ArrayList<>();
         }
-        genres.add(genre);
-    }
-    public void addCharacter(CharacterDTO character){
-        if(characters == null){
-            characters = new ArrayList<>();
-        }
-
-        characters.add(character);
+        directorsId.add(directorId);
     }
 
-    public void addActor(PersonDTO person){
-        if(actors == null){
-            actors = new ArrayList<>();
+    public void addWriterId(int writerId) {
+        if (writersId == null) {
+            writersId = new ArrayList<>();
         }
-
-        actors.add(person);
+        writersId.add(writerId);
     }
 
-    public void addDirector(PersonDTO person){
-        if(directors == null){
-            directors = new ArrayList<>();
+    public void addActorId(int actorId) {
+        if (actorsId == null) {
+            actorsId = new ArrayList<>();
         }
-
-        directors.add(person);
+        actorsId.add(actorId);
     }
 
-    public void addWriter(PersonDTO person){
-        if(writers == null){
-            writers = new ArrayList<>();
+    public void addCharacterId(int characterId) {
+        if (charactersId == null) {
+            charactersId = new ArrayList<>();
         }
-
-        writers.add(person);
+        charactersId.add(characterId);
     }
 }
