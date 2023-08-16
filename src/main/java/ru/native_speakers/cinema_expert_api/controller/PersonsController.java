@@ -13,11 +13,11 @@ public interface PersonsController {
     @GetMapping("/persons/by-imdb-id/{person_id}")
     HttpEntityResponse<PersonDTO> getPersonByImdbId(@PathVariable("person_id") String personId);
     @GetMapping("/persons/by-name/{person_name}")
-    HttpEntityResponse<PersonDTO> getPersonsByName(@PathVariable("person_name") String personName);
+    HttpEntityResponse<List<PersonDTO>> getPersonsByName(@PathVariable("person_name") String personName);
     @GetMapping("/actors")
-    HttpEntityResponse<PersonDTO> getAllActors(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
+    HttpEntityResponse<List<PersonDTO>> getAllActors(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
     @GetMapping("/directors")
-    HttpEntityResponse<PersonDTO> getAllDirectors(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
+    HttpEntityResponse<List<PersonDTO>> getAllDirectors(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
     @GetMapping("/writers")
-    HttpEntityResponse<PersonDTO> getAllWriters(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
+    HttpEntityResponse<List<PersonDTO>> getAllWriters(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
 }

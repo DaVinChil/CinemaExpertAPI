@@ -20,31 +20,31 @@ public class PersonsControllerImp implements PersonsController{
 
     @Override
     public HttpEntityResponse<PersonDTO> getPersonById(int personId) {
-        return new HttpEntityResponse<>(List.of(convertPersonToDto(personsService.getPersonById(personId))));
+        return new HttpEntityResponse<>(convertPersonToDto(personsService.getPersonById(personId)));
     }
 
     @Override
     public HttpEntityResponse<PersonDTO> getPersonByImdbId(String personId) {
-        return new HttpEntityResponse<>(List.of(convertPersonToDto(personsService.getPersonByImdbId(personId))));
+        return new HttpEntityResponse<>(convertPersonToDto(personsService.getPersonByImdbId(personId)));
     }
 
     @Override
-    public HttpEntityResponse<PersonDTO> getPersonsByName(String personName) {
+    public HttpEntityResponse<List<PersonDTO>> getPersonsByName(String personName) {
         return new HttpEntityResponse<>(convertListPersonToDto(personsService.getPersonsByName(personName)));
     }
 
     @Override
-    public HttpEntityResponse<PersonDTO> getAllActors(int page, int pageSize) {
+    public HttpEntityResponse<List<PersonDTO>> getAllActors(int page, int pageSize) {
         return new HttpEntityResponse<>(convertListPersonToDto(personsService.getAllActors(page, pageSize)));
     }
 
     @Override
-    public HttpEntityResponse<PersonDTO> getAllDirectors(int page, int pageSize) {
+    public HttpEntityResponse<List<PersonDTO>> getAllDirectors(int page, int pageSize) {
         return new HttpEntityResponse<>(convertListPersonToDto(personsService.getAllDirectors(page, pageSize)));
     }
 
     @Override
-    public HttpEntityResponse<PersonDTO> getAllWriters(int page, int pageSize) {
+    public HttpEntityResponse<List<PersonDTO>> getAllWriters(int page, int pageSize) {
         return new HttpEntityResponse<>(convertListPersonToDto(personsService.getAllWriters(page, pageSize)));
     }
 
