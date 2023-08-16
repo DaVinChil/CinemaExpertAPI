@@ -1,5 +1,6 @@
 package ru.native_speakers.cinema_expert_api.service;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.model.Person;
@@ -61,17 +62,17 @@ public class PersonsServiceImp implements PersonsService{
     }
 
     @Override
-    public List<Person> getAllActors() {
-        return personsRepository.findAllActors();
+    public List<Person> getAllActors(int page, int pageSize) {
+        return personsRepository.findAllActors(PageRequest.of(page, pageSize)).getContent();
     }
 
     @Override
-    public List<Person> getAllWriters() {
-        return null;
+    public List<Person> getAllWriters(int page, int pageSize) {
+        return personsRepository.findAllWriters(PageRequest.of(page, pageSize)).getContent();
     }
 
     @Override
-    public List<Person> getAllDirectors() {
-        return null;
+    public List<Person> getAllDirectors(int page, int pageSize) {
+        return personsRepository.findAllDirectors(PageRequest.of(page, pageSize)).getContent();
     }
 }

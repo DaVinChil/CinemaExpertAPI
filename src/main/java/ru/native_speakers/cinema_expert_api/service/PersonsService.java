@@ -20,7 +20,7 @@ public interface PersonsService {
     List<Movie> getPersonMoviesAsWriteByPersonName(String name);
     List<Movie> getPersonMoviesAsDirectorByPersonName(String name);
 
-    List<Person> getAllActors();
-    List<Person> getAllWriters();
-    List<Person> getAllDirectors();
+    List<Person> getAllActors(int page, int pageSize);
+    List<Person> getAllWriters(int page, int pageSize);
+    List<Person> getAllDirectors(int page, int pageSize);
 }

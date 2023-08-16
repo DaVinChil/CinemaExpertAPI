@@ -36,5 +36,7 @@ public class PersonDTO {
     private ImageDTO photo;
 
     private List<Integer> charactersId;
-    private List<Integer> moviesId;
+    private List<Integer> moviesAsActor;
+    private List<Integer> moviesAsWriter;
+    private List<Integer> moviesAsDirector;
 }
