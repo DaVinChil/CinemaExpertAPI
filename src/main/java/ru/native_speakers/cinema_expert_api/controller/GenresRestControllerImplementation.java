@@ -16,15 +16,15 @@ public class GenresRestControllerImplementation implements GenresController {
     private final GenresService genresService;
     private final ModelMapper modelMapper;
 
-    public GenresRestControllerImplementation(@Qualifier(value = "genresServiceImplementation") GenresService genresService,
+    public GenresRestControllerImplementation(@Qualifier(value = "genresServiceImp") GenresService genresService,
                                               ModelMapper modelMapper) {
         this.genresService = genresService;
         this.modelMapper = modelMapper;
     }
 
     @Override
-    public HttpEntityResponse<GenreDTO> getGenres(int count) {
-        return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenres(count)));
+    public HttpEntityResponse<GenreDTO> getGenres(int pageSize, int page) {
+        return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenres(pageSize, page)));
     }
 
     @Override

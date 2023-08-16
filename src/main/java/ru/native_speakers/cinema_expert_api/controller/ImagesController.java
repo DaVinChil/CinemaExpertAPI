@@ -1,5 +1,6 @@
 package ru.native_speakers.cinema_expert_api.controller;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +23,13 @@ public interface ImagesController {
                                               int id);
 
     @GetMapping
-    HttpEntityResponse<ImageDTO> getImages(@RequestParam(name = "count", defaultValue = "20")
-                                           @Min(value = 1, message = "Parameter 'count' cannot be less than 1")
-                                           int count);
+    HttpEntityResponse<ImageDTO> getImages(@RequestParam(name = "page_size")
+                                           @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
+                                           @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
+                                           int pageSize,
+                                           @RequestParam(name = "page")
+                                           @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
+                                           int page);
 
     ImageDTO convertImageToImageDTO(Image image);
     List<ImageDTO> convertImageToImageDTO(List<Image> images);

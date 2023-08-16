@@ -3,12 +3,9 @@ package ru.native_speakers.cinema_expert_api.service;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
-import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.model.Person;
 import ru.native_speakers.cinema_expert_api.repository.PersonsRepository;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PersonsServiceImp implements PersonsService {
@@ -59,7 +56,6 @@ public class PersonsServiceImp implements PersonsService {
         return persons;
     }
 
-    @Override
     public Person getPersonByImdbId(String imdbId) {
         return personsRepository.findByImdbId(imdbId).orElseThrow(() -> new EntityNotFoundException("No person by given imdb id."));
     }

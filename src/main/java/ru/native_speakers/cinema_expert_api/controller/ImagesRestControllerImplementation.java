@@ -17,7 +17,7 @@ public class ImagesRestControllerImplementation implements ImagesController {
     private final ImagesService imagesService;
     private final ModelMapper modelMapper;
 
-    public ImagesRestControllerImplementation(@Qualifier("imagesServiceImplementation") ImagesService imagesService,
+    public ImagesRestControllerImplementation(@Qualifier("imagesServiceImp") ImagesService imagesService,
                                               ModelMapper modelMapper) {
         this.imagesService = imagesService;
         this.modelMapper = modelMapper;
@@ -29,8 +29,8 @@ public class ImagesRestControllerImplementation implements ImagesController {
     }
 
     @Override
-    public HttpEntityResponse<ImageDTO> getImages(int count) {
-        return new HttpEntityResponse<>(convertImageToImageDTO(imagesService.findImages(count)));
+    public HttpEntityResponse<ImageDTO> getImages(int pageSize, int page) {
+        return new HttpEntityResponse<>(convertImageToImageDTO(imagesService.findImages(pageSize, page)));
     }
 
     @Override

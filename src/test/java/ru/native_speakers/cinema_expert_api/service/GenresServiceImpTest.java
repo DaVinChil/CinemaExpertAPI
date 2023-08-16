@@ -17,7 +17,7 @@ import ru.native_speakers.cinema_expert_api.repository.GenresRepository;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-class GenresServiceImplementationTest {
+class GenresServiceImpTest {
 
     @Mock
     private GenresRepository genresRepository;
@@ -26,7 +26,7 @@ class GenresServiceImplementationTest {
     private Genre genre;
 
     @InjectMocks
-    private GenresServiceImplementation genresService;
+    private GenresServiceImp genresService;
 
     @Test
     void findGenreById_ReturnsGenreClassIfRepositoryReturnsPresentOptional() {
