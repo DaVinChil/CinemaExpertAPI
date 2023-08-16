@@ -1,5 +1,7 @@
 package ru.native_speakers.cinema_expert_api.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,43 @@ public interface PersonsRepository extends JpaRepository<Person, Integer> {
             nativeQuery = true
     )
     List<Person> findDirectorsByMovieId(@Param("movieId") int movieId);
+
+    @Query(
+            value = """
+                    select persons.* from movies_actors
+                    join persons on persons.person_id = movies_actors.person_id
+                    """,
+            countQuery = """
+                    select count(*) from movies_actors
+                    join persons on persons.person_id = movies_actors.person_id
+                    """,
+            nativeQuery = true
+    )
+    Page<Person> findAllActors(Pageable pageable);
+
+    @Query(
+            value = """
+                    select persons.* from movies_writers
+                    join persons on persons.person_id = movies_writers.person_id
+                    """,
+            countQuery = """
+                    select count(*) from movies_writers
+                    join persons on persons.person_id = movies_writers.person_id
+                    """,
+            nativeQuery = true
+    )
+    Page<Person> findAllWriters(Pageable pageable);
+
+    @Query(
+            value = """
+                    select persons.* from movies_directors
+                    join persons on persons.person_id = movies_directors.person_id
+                    """,
+            countQuery = """
+                    select count(*) from movies_directors
+                    join persons on persons.person_id = movies_directors.person_id
+                    """,
+            nativeQuery = true
+    )
+    Page<Person> findAllDirectors(Pageable pageable);
 }

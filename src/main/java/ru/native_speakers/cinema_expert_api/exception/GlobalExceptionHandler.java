@@ -25,5 +25,4 @@ public class GlobalExceptionHandler {
         e.getConstraintViolations().forEach(constraintViolation -> errorMessage.append(constraintViolation.getMessage()).append(";"));
         return new HttpEntityExceptionResponse(errorMessage.toString(), Collections.emptyList());
     }
-
 }

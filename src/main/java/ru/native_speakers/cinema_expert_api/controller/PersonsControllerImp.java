@@ -3,15 +3,15 @@ package ru.native_speakers.cinema_expert_api.controller;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.persons.MovieByPerson;
 import ru.native_speakers.cinema_expert_api.dto.persons.PersonDto;
-import ru.native_speakers.cinema_expert_api.service.SqlIdPersonsService;
+import ru.native_speakers.cinema_expert_api.service.PersonsService;
 
 import java.util.List;
 
 @RestController
-public class SqlIdPersonsController implements PersonsController{
-    private final SqlIdPersonsService personsService;
+public class PersonsControllerImp implements PersonsController{
+    private final PersonsService personsService;
 
-    public SqlIdPersonsController(SqlIdPersonsService personsService) {
+    public PersonsControllerImp(PersonsService personsService) {
         this.personsService = personsService;
     }
 

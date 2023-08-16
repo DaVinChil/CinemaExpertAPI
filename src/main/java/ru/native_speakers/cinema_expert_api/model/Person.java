@@ -64,13 +64,11 @@ public class Person {
     private List<Character> characters;
 
     @ManyToMany(mappedBy = "actors", cascade = CascadeType.PERSIST)
-    private List<Movie> filmography;
+    private List<Movie> moviesAsActor;
 
-    public void addCharacter(Character character){
-        if(characters == null){
-            characters = new ArrayList<>();
-        }
+    @ManyToMany(mappedBy = "writers", cascade = CascadeType.PERSIST)
+    private List<Movie> moviesAsWriter;
 
-        characters.add(character);
-    }
+    @ManyToMany(mappedBy = "actors", cascade = CascadeType.PERSIST)
+    private List<Movie> moviesAsDirector;
 }
