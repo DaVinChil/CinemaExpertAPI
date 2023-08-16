@@ -23,7 +23,7 @@ public interface MoviesController {
     HttpEntityResponse<MovieDTO> getMovieByMovieTitle(@PathVariable(name = "title") String movieTitle);
 
     @GetMapping("/find-by-title-containing/{title}")
-    HttpEntityResponse<MovieDTO> getMoviesByMoviesTitleContaining(@PathVariable(name = "title") String movieTitle,
+    HttpEntityResponse<List<MovieDTO>> getMoviesByMoviesTitleContaining(@PathVariable(name = "title") String movieTitle,
                                                                   @RequestParam(name = "page_size")
                                                                   @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                                                   @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
@@ -33,7 +33,7 @@ public interface MoviesController {
                                                                   int page);
 
     @GetMapping("/top-rated")
-    HttpEntityResponse<MovieDTO> getTopRatedMovies(@RequestParam(name = "page_size")
+    HttpEntityResponse<List<MovieDTO>> getTopRatedMovies(@RequestParam(name = "page_size")
                                                    @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                                    @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
                                                    int pageSize,
@@ -42,7 +42,7 @@ public interface MoviesController {
                                                    int page);
 
     @GetMapping("/top-by-genre-name/{genre}")
-    HttpEntityResponse<MovieDTO> getTopMoviesByGenreName(@PathVariable(name = "genre") String genre,
+    HttpEntityResponse<List<MovieDTO>> getTopMoviesByGenreName(@PathVariable(name = "genre") String genre,
                                                          @RequestParam(name = "page_size")
                                                          @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                                          @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
@@ -52,7 +52,7 @@ public interface MoviesController {
                                                          int page);
 
     @GetMapping("/top-by-genre-id/{id}")
-    HttpEntityResponse<MovieDTO> getTopMoviesByGenreId(@PathVariable(name = "id")
+    HttpEntityResponse<List<MovieDTO>> getTopMoviesByGenreId(@PathVariable(name = "id")
                                                        @Min(value = 1, message = "Genre id cannot be less than 1")
                                                        int genreId,
                                                        @RequestParam(name = "page_size")
@@ -64,17 +64,17 @@ public interface MoviesController {
                                                        int page);
 
     @GetMapping("/{movieId}/directors")
-    HttpEntityResponse<PersonDTO> getDirectorsByMovieId(@PathVariable("movieId")
+    HttpEntityResponse<List<PersonDTO>> getDirectorsByMovieId(@PathVariable("movieId")
                                                         @Min(value = 1, message = "Movie id cannot be less than 1")
                                                         int movieId);
 
     @GetMapping("/{movieId}/writers")
-    HttpEntityResponse<PersonDTO> getWritersByMovieId(@PathVariable("movieId")
+    HttpEntityResponse<List<PersonDTO>> getWritersByMovieId(@PathVariable("movieId")
                                                       @Min(value = 1, message = "Movie id cannot be less than 1")
                                                       int movieId);
 
     @GetMapping("/{movieId}/actors")
-    HttpEntityResponse<PersonDTO> getActorsByMovieId(@PathVariable("movieId")
+    HttpEntityResponse<List<PersonDTO>> getActorsByMovieId(@PathVariable("movieId")
                                                      @Min(value = 1, message = "Movie id cannot be less than 1")
                                                      int movieId);
 

@@ -23,7 +23,7 @@ public interface ImagesController {
                                               int id);
 
     @GetMapping
-    HttpEntityResponse<ImageDTO> getImages(@RequestParam(name = "page_size")
+    HttpEntityResponse<List<ImageDTO>> getImages(@RequestParam(name = "page_size")
                                            @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                            @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
                                            int pageSize,

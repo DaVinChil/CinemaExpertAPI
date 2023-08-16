@@ -23,13 +23,13 @@ public class GenresRestControllerImplementation implements GenresController {
     }
 
     @Override
-    public HttpEntityResponse<GenreDTO> getGenres(int pageSize, int page) {
+    public HttpEntityResponse<List<GenreDTO>> getGenres(int pageSize, int page) {
         return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenres(pageSize, page)));
     }
 
     @Override
     public HttpEntityResponse<GenreDTO> getGenreById(int genreId) {
-        return new HttpEntityResponse<>(convertGenreToGenreDTO(List.of(genresService.findGenreById(genreId))));
+        return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenreById(genreId)));
     }
 
     @Override
