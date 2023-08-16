@@ -1,31 +1,23 @@
 package ru.native_speakers.cinema_expert_api.controller;
 
 import org.springframework.web.bind.annotation.*;
+import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
 import ru.native_speakers.cinema_expert_api.dto.PersonDTO;
-import ru.native_speakers.cinema_expert_api.dto.persons.MovieByPerson;
 
 import java.util.List;
 
 @RestController
 public interface PersonsController {
-    @GetMapping("/persons/{person_id}/filmography")
-    List<MovieByPerson> getMoviesByPersonId(@PathVariable("person_id") int personId);
-    @GetMapping("/persons/{person_id}/filmography")
-    List<MovieByPerson> getMoviesByPersonImdbId(@PathVariable("person_id") String personId);
-    @GetMapping("/persons/{person_id}/filmography")
-    List<MovieByPerson> getMoviesByPersonName(@PathVariable("person_id") String personName);
     @GetMapping("/persons/by-id/{person_id}")
-    PersonDTO getPersonById(@PathVariable("person_id") int personId);
+    HttpEntityResponse<PersonDTO> getPersonById(@PathVariable("person_id") int personId);
     @GetMapping("/persons/by-imdb-id/{person_id}")
-    PersonDTO getPersonByImdbId(@PathVariable("person_id") String personId);
+    HttpEntityResponse<PersonDTO> getPersonByImdbId(@PathVariable("person_id") String personId);
     @GetMapping("/persons/by-name/{person_name}")
-    PersonDTO getPersonById(@PathVariable("person_name") String personName);
+    HttpEntityResponse<PersonDTO> getPersonsByName(@PathVariable("person_name") String personName);
     @GetMapping("/actors")
-    List<PersonDTO> getAllActors();
+    HttpEntityResponse<PersonDTO> getAllActors(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
     @GetMapping("/directors")
-    List<PersonDTO> getAllDirectors();
+    HttpEntityResponse<PersonDTO> getAllDirectors(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
     @GetMapping("/writers")
-    List<PersonDTO> getAllWriters();
-    @GetMapping("/persons")
-    List<PersonDTO> getAllPersons();
+    HttpEntityResponse<PersonDTO> getAllWriters(@RequestParam("page") int page, @RequestParam("page_size") int pageSize);
 }

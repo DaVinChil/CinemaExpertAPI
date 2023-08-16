@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import ru.native_speakers.cinema_expert_api.model.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PersonsRepository extends JpaRepository<Person, Integer> {
@@ -18,6 +19,8 @@ public interface PersonsRepository extends JpaRepository<Person, Integer> {
             nativeQuery = true
     )
     List<Person> findDirectorsByMovieId(@Param("movieId") int movieId);
+
+
 
     @Query(
             value = """
@@ -57,4 +60,8 @@ public interface PersonsRepository extends JpaRepository<Person, Integer> {
             nativeQuery = true
     )
     Page<Person> findAllDirectors(Pageable pageable);
+
+    Optional<Person> findByImdbId(String imdbId);
+    Optional<Person> findById(int id);
+    List<Person> findByFullNameContains(String personName);
 }
