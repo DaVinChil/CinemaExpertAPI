@@ -19,7 +19,7 @@ public interface PersonsController {
     @GetMapping("/actors")
     HttpEntityResponse<List<PersonDTO>> getAllActors(@RequestParam(name = "page_size")
                                                      @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
-                                                     @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
+                                                     @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
                                                      int pageSize,
                                                      @RequestParam(name = "page")
                                                      @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
@@ -27,7 +27,7 @@ public interface PersonsController {
     @GetMapping("/directors")
     HttpEntityResponse<List<PersonDTO>> getAllDirectors(@RequestParam(name = "page_size")
                                                         @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
-                                                        @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
+                                                        @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
                                                         int pageSize,
                                                         @RequestParam(name = "page")
                                                         @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
@@ -35,7 +35,7 @@ public interface PersonsController {
     @GetMapping("/writers")
     HttpEntityResponse<List<PersonDTO>> getAllWriters(@RequestParam(name = "page_size")
                                                       @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
-                                                      @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
+                                                      @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
                                                       int pageSize,
                                                       @RequestParam(name = "page")
                                                       @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
