@@ -9,16 +9,18 @@ import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.repository.MoviesRepository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-class MoviesServiceImplementationTest {
+class MoviesServiceImpTest {
 
     @Mock
     private MoviesRepository moviesRepository;
@@ -27,7 +29,7 @@ class MoviesServiceImplementationTest {
     private Movie movie;
 
     @InjectMocks
-    private MoviesServiceImplementation moviesService;
+    private MoviesServiceImp moviesService;
 
     @Test
     void findMovieByMovieId_ReturnsMovieClassIfRepositoryReturnsPresentOptional() {
@@ -63,59 +65,67 @@ class MoviesServiceImplementationTest {
 
     @Test
     void findMoviesByMoviesTitleContaining_ReturnsListOfMovieClassIfRepositoryReturnsNotEmptyListOfMovieClass() {
-        when(moviesRepository.findAllByTitleContaining(anyString())).thenReturn(List.of(movie));
+        when(moviesRepository.findAllByTitleContaining(anyString(), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(movie)));
 
         String movieTitle = "Inc";
-        List<Movie> result = moviesService.findMoviesByMoviesTitleContaining(movieTitle);
+        int page = 0;
+        int pageSize = 10;
+        List<Movie> result = moviesService.findMoviesByMoviesTitleContaining(movieTitle, pageSize, page);
         assertThat(result).isNotNull();
         assertThat(result.size()).isGreaterThan(0);
     }
 
     @Test
     void findMoviesByMoviesTitleContaining_ThrowsEntityNotFoundExceptionIfRepositoryReturnsEmptyListOfMovieClass() {
-        when(moviesRepository.findAllByTitleContaining(anyString())).thenReturn(Collections.emptyList());
+        when(moviesRepository.findAllByTitleContaining(anyString(), any(Pageable.class))).thenReturn(Page.empty());
 
         String movieTitle = "Wrong title";
-        assertThrows(EntityNotFoundException.class, () -> moviesService.findMoviesByMoviesTitleContaining(movieTitle));
+        int pageSize = 10;
+        int page = 0;
+        assertThrows(EntityNotFoundException.class, () -> moviesService.findMoviesByMoviesTitleContaining(movieTitle, pageSize, page));
     }
 
     @Test
     void findTopByGenreName_ReturnsNotEmptyResultRepositoryReturnsNotEmptyListOfMovieClass() {
-        when(moviesRepository.findByGenreName(anyString(), anyInt())).thenReturn(List.of(movie));
+        when(moviesRepository.findAllByGenreName(anyString(), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(movie)));
 
         String genreName = "Drama";
-        int count = 15;
-        List<Movie> result = moviesService.findTopByGenreName(genreName, count);
+        int pageSize = 10;
+        int page = 0;
+        List<Movie> result = moviesService.findTopByGenreName(genreName, pageSize, page);
         assertThat(result).isNotNull();
         assertThat(result.size()).isGreaterThan(0);
     }
 
     @Test
     void findTopByGenreName_ThrowsEntityNotFoundExceptionIfRepositoryReturnsEmptyListOfMovieClass() {
-        when(moviesRepository.findByGenreName(anyString(), anyInt())).thenReturn(Collections.emptyList());
+        when(moviesRepository.findAllByGenreName(anyString(), any(Pageable.class))).thenReturn(Page.empty());
 
         String genreName = "Wrong genre";
-        int count = 15;
-        assertThrows(EntityNotFoundException.class, () -> moviesService.findTopByGenreName(genreName, count));
+        int page = 0;
+        int pageSize = 10;
+        assertThrows(EntityNotFoundException.class, () -> moviesService.findTopByGenreName(genreName, pageSize, page));
     }
 
     @Test
     void findTopByGenreId_ReturnsListOfMovieClassIfRepositoryReturnsNotEmptyListOfMovieClass() {
-        when(moviesRepository.findByGenreId(anyInt(), anyInt())).thenReturn(List.of(movie));
+        when(moviesRepository.findAllByGenreId(anyInt(), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(movie)));
 
         int genreId = 2;
-        int count = 15;
-        List<Movie> result = moviesService.findTopByGenreId(genreId, count);
+        int page = 0;
+        int pageSize = 10;
+        List<Movie> result = moviesService.findTopByGenreId(genreId, pageSize, page);
         assertThat(result).isNotNull();
         assertThat(result.size()).isGreaterThan(0);
     }
 
     @Test
     void findTopByGenreId_ThrowsEntityNotFoundExceptionIfRepositoryReturnsEmptyListOfMovieClass() {
-        when(moviesRepository.findByGenreId(anyInt(), anyInt())).thenReturn(Collections.emptyList());
+        when(moviesRepository.findAllByGenreId(anyInt(), any(Pageable.class))).thenReturn(Page.empty());
 
         int genreId = 2;
-        int count = 15;
-        assertThrows(EntityNotFoundException.class, () -> moviesService.findTopByGenreId(genreId, count));
+        int page = 0;
+        int pageSize = 10;
+        assertThrows(EntityNotFoundException.class, () -> moviesService.findTopByGenreId(genreId, pageSize, page));
     }
 }

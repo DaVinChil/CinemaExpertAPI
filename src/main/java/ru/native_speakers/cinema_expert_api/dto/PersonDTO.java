@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PersonDTO {
 
     @NotNull(message = "Person's id should not be null")
@@ -36,5 +38,7 @@ public class PersonDTO {
     private ImageDTO photo;
 
     private List<Integer> charactersId;
-    private List<Integer> moviesId;
+    private List<Integer> moviesAsActor;
+    private List<Integer> moviesAsWriter;
+    private List<Integer> moviesAsDirector;
 }

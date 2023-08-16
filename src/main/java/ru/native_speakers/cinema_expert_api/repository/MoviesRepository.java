@@ -7,14 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import ru.native_speakers.cinema_expert_api.model.Movie;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface MoviesRepository extends JpaRepository<Movie, Integer> {
 
     Optional<Movie> findByTitle(String title);
-    List<Movie> findAllByTitleContaining(String movieTitle, Pageable pageable);
+    Page<Movie> findAllByTitleContaining(String movieTitle, Pageable pageable);
     Page<Movie> findByOrderByChartRatingDesc(Pageable pageable);
 
     @Query(

@@ -36,18 +36,24 @@ class MoviesRepositoryTest {
     @Test
     void findAllByTitleContaining_ResultListIsNotEmptyIfThereAreMoviesContainsThisTitle() {
         String movieTitle = "The Lord of The Rings";
-        assertNotEquals(0, moviesRepository.findAllByTitleContaining(movieTitle).size());
+        int page = 0;
+        int pageSize = 10;
+        assertNotEquals(0, moviesRepository.findAllByTitleContaining(movieTitle, PageRequest.of(page, pageSize)).getContent().size());
     }
 
     @Test
     void findAllByTitleContaining_ResultListIsEmptyIfThereIsNotAnyMovieTitleContainsThisString() {
         String movieTitle = "There are no movies contains this title";
-        assertEquals(0, moviesRepository.findAllByTitleContaining(movieTitle).size());
+        int page = 0;
+        int pageSize = 10;
+        assertEquals(0, moviesRepository.findAllByTitleContaining(movieTitle, PageRequest.of(page, pageSize)).getContent().size());
     }
 
     @Test
     void findByOrderByChartRatingDesc_DescOrderingTest() {
-        List<Movie> movies = moviesRepository.findByOrderByChartRatingDesc(PageRequest.of(0, 20)).getContent();
+        int page = 0;
+        int pageSize = 10;
+        List<Movie> movies = moviesRepository.findByOrderByChartRatingDesc(PageRequest.of(page, pageSize)).getContent();
         for (int i = 1; i < movies.size(); ++i) {
             Movie previous = movies.get(i - 1);
             Movie current = movies.get(i);
@@ -58,22 +64,27 @@ class MoviesRepositoryTest {
     @Test
     void findByGenreName_AllMoviesHaveThisGenreTest() {
         String genreName = "Sci-fi";
-        int count = 15;
-        for (Movie movie : moviesRepository.findByGenreName(genreName, PageRequest.of(0, count))) {
+        int page = 0;
+        int pageSize = 10;
+        for (Movie movie : moviesRepository.findAllByGenreName(genreName, PageRequest.of(page, pageSize)).getContent()) {
             assertThat(movie.getGenres()).anySatisfy(genre -> genre.getName().equals(genreName));
         }
     }
 
     @Test
     void findByGenreName_EmptyListIfGenreWithNameNotExists() {
-        assertEquals(0, moviesRepository.findByGenreName("Something wrong", PageRequest.of(0, 20)).getContent().size());
+        String genreName = "Something wrong";
+        int page = 0;
+        int pageSize = 10;
+        assertEquals(0, moviesRepository.findAllByGenreName(genreName, PageRequest.of(page, pageSize)).getContent().size());
     }
 
     @Test
     void findByGenreId_AllMoviesHavingGenreWithThisId() {
         int genreId = 2;
-        int count = 15;
-        for (Movie movie : moviesRepository.findByGenreId(genreId, PageRequest.of(0, count))) {
+        int page = 0;
+        int pageSize = 10;
+        for (Movie movie : moviesRepository.findAllByGenreId(genreId, PageRequest.of(page, pageSize)).getContent()) {
             assertThat(movie.getGenres()).anySatisfy(genre -> Integer.compare(genre.getId(), genreId));
         }
     }

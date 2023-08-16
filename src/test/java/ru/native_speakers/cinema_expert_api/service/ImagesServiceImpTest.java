@@ -16,7 +16,7 @@ import ru.native_speakers.cinema_expert_api.repository.ImagesRepository;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-class ImagesServiceImplementationTest {
+class ImagesServiceImpTest {
 
     @Mock
     private Image image;
@@ -25,7 +25,7 @@ class ImagesServiceImplementationTest {
     private ImagesRepository imagesRepository;
 
     @InjectMocks
-    private ImagesServiceImplementation imagesService;
+    private ImagesServiceImp imagesService;
 
     @Test
     void findImageByImageId_ReturnsImageClassIfRepositoryReturnsPresentOptional() {

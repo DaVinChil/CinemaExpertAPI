@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class MoviesServiceImplementation implements MoviesService {
+public class MoviesServiceImp implements MoviesService {
 
     private final MoviesRepository moviesRepository;
 
@@ -36,7 +36,7 @@ public class MoviesServiceImplementation implements MoviesService {
 
     @Override
     public List<Movie> findMoviesByMoviesTitleContaining(String movieTitle, int pageSize, int page) throws EntityNotFoundException {
-        List<Movie> movies = moviesRepository.findAllByTitleContaining(movieTitle, PageRequest.of(page, pageSize));
+        List<Movie> movies = moviesRepository.findAllByTitleContaining(movieTitle, PageRequest.of(page, pageSize)).getContent();
         if (movies.isEmpty()) {
             throw new EntityNotFoundException("Movies not found");
         }

@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class GenresServiceImplementation implements GenresService {
+public class GenresServiceImp implements GenresService {
 
     private final GenresRepository genresRepository;
 
