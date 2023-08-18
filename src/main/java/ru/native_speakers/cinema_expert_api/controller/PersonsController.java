@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Min;
 import org.springframework.web.bind.annotation.*;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
 import ru.native_speakers.cinema_expert_api.dto.PersonDTO;
+import ru.native_speakers.cinema_expert_api.model.Person;
 
 import java.util.List;
 
@@ -20,24 +21,28 @@ public interface PersonsController {
     HttpEntityResponse<List<PersonDTO>> getAllActors(@RequestParam(name = "page_size")
                                                      @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                                      @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
-                                                     int pageSize,
+                                                     int page,
                                                      @RequestParam(name = "page")
                                                      @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
-                                                     int page);
+                                                     int pageSize);
     @GetMapping("/directors")
     HttpEntityResponse<List<PersonDTO>> getAllDirectors(@RequestParam(name = "page_size")
                                                         @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                                         @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
-                                                        int pageSize,
+                                                        int page,
                                                         @RequestParam(name = "page")
                                                         @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
-                                                        int page);
+                                                        int pageSize);
     @GetMapping("/writers")
     HttpEntityResponse<List<PersonDTO>> getAllWriters(@RequestParam(name = "page_size")
                                                       @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                                       @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
-                                                      int pageSize,
+                                                      int page,
                                                       @RequestParam(name = "page")
                                                       @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
-                                                      int page);
+                                                      int pageSize);
+
+    PersonDTO convertPersonToDto(Person person);
+    List<PersonDTO> convertListPersonsToDto(List<Person> persons);
+
 }

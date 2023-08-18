@@ -30,25 +30,25 @@ public class PersonsControllerImp implements PersonsController{
 
     @Override
     public HttpEntityResponse<List<PersonDTO>> getPersonsByName(String personName) {
-        return new HttpEntityResponse<>(convertListPersonToDto(personsService.getPersonsByName(personName)));
+        return new HttpEntityResponse<>(convertListPersonsToDto(personsService.getPersonsByName(personName)));
     }
 
     @Override
     public HttpEntityResponse<List<PersonDTO>> getAllActors(int page, int pageSize) {
-        return new HttpEntityResponse<>(convertListPersonToDto(personsService.getAllActors(page, pageSize)));
+        return new HttpEntityResponse<>(convertListPersonsToDto(personsService.getAllActors(page, pageSize)));
     }
 
     @Override
     public HttpEntityResponse<List<PersonDTO>> getAllDirectors(int page, int pageSize) {
-        return new HttpEntityResponse<>(convertListPersonToDto(personsService.getAllDirectors(page, pageSize)));
+        return new HttpEntityResponse<>(convertListPersonsToDto(personsService.getAllDirectors(page, pageSize)));
     }
 
     @Override
     public HttpEntityResponse<List<PersonDTO>> getAllWriters(int page, int pageSize) {
-        return new HttpEntityResponse<>(convertListPersonToDto(personsService.getAllWriters(page, pageSize)));
+        return new HttpEntityResponse<>(convertListPersonsToDto(personsService.getAllWriters(page, pageSize)));
     }
 
-    private PersonDTO convertPersonToDto(Person person){
+    public PersonDTO convertPersonToDto(Person person){
         PersonDTO personDto = PersonDTO.builder()
                 .deathCause(person.getDeathCause())
                 .birthday(person.getBirthday())
@@ -67,7 +67,7 @@ public class PersonsControllerImp implements PersonsController{
         return personDto;
     }
 
-    private List<PersonDTO> convertListPersonToDto(List<Person> persons) {
+    public List<PersonDTO> convertListPersonsToDto(List<Person> persons) {
         List<PersonDTO> personDTOS = new ArrayList<>(persons.size());
         persons.forEach(person -> personDTOS.add(convertPersonToDto(person)));
         return personDTOS;
