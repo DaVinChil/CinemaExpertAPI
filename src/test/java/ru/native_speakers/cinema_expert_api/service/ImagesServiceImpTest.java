@@ -29,17 +29,17 @@ class ImagesServiceImpTest {
 
     @Test
     void findImageByImageId_ReturnsImageClassIfRepositoryReturnsPresentOptional() {
-        when(imagesRepository.findById(anyInt())).thenReturn(Optional.of(image));
+        when(imagesRepository.findById(anyLong())).thenReturn(Optional.of(image));
 
-        int imageId = 2;
+        long imageId = 2;
         assertThat(imagesService.findImageByImageId(imageId)).isInstanceOf(Image.class);
     }
 
     @Test
     void findImageByImageId_ThrowsEntityNotFoundExceptionIfRepositoryReturnsEmptyOptional() {
-        when(imagesRepository.findById(anyInt())).thenReturn(Optional.empty());
+        when(imagesRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        int imageId = 2;
+        long imageId = 2;
         assertThrows(EntityNotFoundException.class, () -> imagesService.findImageByImageId(imageId));
     }
 }

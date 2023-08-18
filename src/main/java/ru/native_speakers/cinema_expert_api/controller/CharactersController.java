@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/characters")
 public interface CharactersController {
     @GetMapping("/by-id/{id}")
-    HttpEntityResponse<CharacterDTO> getCharacterById(@PathVariable("id") int characterId);
+    HttpEntityResponse<CharacterDTO> getCharacterById(@PathVariable("id") long characterId);
     @GetMapping("/by-name/{name}")
     HttpEntityResponse<List<CharacterDTO>> getCharactersByName(@PathVariable("name") String characterName);
 }

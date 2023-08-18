@@ -12,9 +12,9 @@ import java.util.List;
 @RestController
 public interface PersonsController {
     @GetMapping("/persons/{person_id}")
-    HttpEntityResponse<PersonDTO> getPersonById(@PathVariable("person_id") @Min(value = 1, message = "Person id cannot be less than 1") int personId);
+    HttpEntityResponse<PersonDTO> getPersonById(@PathVariable("person_id") @Min(value = 1, message = "Person id cannot be less than 1") long personId);
     @GetMapping("/persons/by-imdb-id/{person_id}")
-    HttpEntityResponse<PersonDTO> getPersonByImdbId(@PathVariable("person_id") String personId);
+    HttpEntityResponse<PersonDTO> getPersonByImdbId(@PathVariable("person_id") String personImdbId);
     @GetMapping("/persons/by-name/{person_name}")
     HttpEntityResponse<List<PersonDTO>> getPersonsByName(@PathVariable("person_name") String personName);
     @GetMapping("/actors")

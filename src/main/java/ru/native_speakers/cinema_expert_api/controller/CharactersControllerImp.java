@@ -18,8 +18,8 @@ public class CharactersControllerImp implements CharactersController{
     }
 
     @Override
-    public HttpEntityResponse<CharacterDTO> getCharacterById(int characterId) {
-        return new HttpEntityResponse<>(convertCharacterToDto(charactersService.getCharacterById(characterId)));
+    public HttpEntityResponse<CharacterDTO> getCharacterById(long characterId) {
+        return new HttpEntityResponse<>(convertCharacterToDto(charactersService.getCharacterByCharacterId(characterId)));
     }
 
     @Override

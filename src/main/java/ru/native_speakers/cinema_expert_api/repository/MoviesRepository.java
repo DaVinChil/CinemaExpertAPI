@@ -10,7 +10,7 @@ import ru.native_speakers.cinema_expert_api.model.Movie;
 import java.util.Optional;
 
 @Repository
-public interface MoviesRepository extends JpaRepository<Movie, Integer> {
+public interface MoviesRepository extends JpaRepository<Movie, Long> {
 
     Optional<Movie> findByTitle(String title);
     Page<Movie> findAllByTitleContaining(String movieTitle, Pageable pageable);
@@ -28,5 +28,5 @@ public interface MoviesRepository extends JpaRepository<Movie, Integer> {
             countQuery = "select count(*) from movies join movies_genres on movies.movie_id = movies_genres.movie_id join genres on genres.genre_id = movies_genres.genre_id where genres.genre_id = :genreId",
             nativeQuery = true
     )
-    Page<Movie> findAllByGenreId(@Param("genreId") int genreId, Pageable pageable);
+    Page<Movie> findAllByGenreId(@Param("genreId") long genreId, Pageable pageable);
 }

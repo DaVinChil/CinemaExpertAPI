@@ -12,15 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface PersonsRepository extends JpaRepository<Person, Integer> {
+public interface PersonsRepository extends JpaRepository<Person, Long> {
 
     @Query(
             value = "select persons.* from movies join movies_directors on movies.movie_id = movies_directors.movie_id join persons on movies_directors.person_id = persons.person_id where movies.movie_id = :movieId",
             nativeQuery = true
     )
-    List<Person> findDirectorsByMovieId(@Param("movieId") int movieId);
-
-
+    List<Person> findDirectorsByMovieId(@Param("movieId") long movieId);
 
     @Query(
             value = """
@@ -62,6 +60,6 @@ public interface PersonsRepository extends JpaRepository<Person, Integer> {
     Page<Person> findAllDirectors(Pageable pageable);
 
     Optional<Person> findByImdbId(String imdbId);
-    Optional<Person> findById(int id);
+    Optional<Person> findById(long id);
     List<Person> findByFullNameContains(String personName);
 }

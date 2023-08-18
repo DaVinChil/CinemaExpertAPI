@@ -28,8 +28,8 @@ public class GenresRestControllerImplementation implements GenresController {
     }
 
     @Override
-    public HttpEntityResponse<GenreDTO> getGenreById(int genreId) {
-        return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenreById(genreId)));
+    public HttpEntityResponse<GenreDTO> getGenreById(long genreId) {
+        return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenreByGenreId(genreId)));
     }
 
     @Override

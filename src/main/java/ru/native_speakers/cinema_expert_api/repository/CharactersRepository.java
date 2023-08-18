@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CharactersRepository extends JpaRepository<Character, Integer> {
+public interface CharactersRepository extends JpaRepository<Character, Long> {
     List<Character> findByNameContains(String name);
 }

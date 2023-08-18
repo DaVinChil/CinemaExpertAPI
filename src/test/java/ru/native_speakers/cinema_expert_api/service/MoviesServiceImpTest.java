@@ -33,17 +33,17 @@ class MoviesServiceImpTest {
 
     @Test
     void findMovieByMovieId_ReturnsMovieClassIfRepositoryReturnsPresentOptional() {
-        when(moviesRepository.findById(anyInt())).thenReturn(Optional.of(movie));
+        when(moviesRepository.findById(anyLong())).thenReturn(Optional.of(movie));
 
-        int movieId = 1;
+        long movieId = 1;
         assertThat(moviesService.findMovieByMovieId(movieId)).isInstanceOf(Movie.class);
     }
 
     @Test
     void findMovieByMovieId_ThrowsEntityNotFoundExceptionIfRepositoryReturnsEmptyOptional() {
-        when(moviesRepository.findById(anyInt())).thenReturn(Optional.empty());
+        when(moviesRepository.findById(anyLong())).thenReturn(Optional.empty());
 
-        int movieId = 1001;
+        long movieId = 1001;
         assertThrows(EntityNotFoundException.class, () -> moviesService.findMovieByMovieId(movieId));
     }
 
@@ -109,9 +109,9 @@ class MoviesServiceImpTest {
 
     @Test
     void findTopByGenreId_ReturnsListOfMovieClassIfRepositoryReturnsNotEmptyListOfMovieClass() {
-        when(moviesRepository.findAllByGenreId(anyInt(), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(movie)));
+        when(moviesRepository.findAllByGenreId(anyLong(), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(movie)));
 
-        int genreId = 2;
+        long genreId = 2;
         int page = 0;
         int pageSize = 10;
         List<Movie> result = moviesService.findTopByGenreId(genreId, pageSize, page);
@@ -121,9 +121,9 @@ class MoviesServiceImpTest {
 
     @Test
     void findTopByGenreId_ThrowsEntityNotFoundExceptionIfRepositoryReturnsEmptyListOfMovieClass() {
-        when(moviesRepository.findAllByGenreId(anyInt(), any(Pageable.class))).thenReturn(Page.empty());
+        when(moviesRepository.findAllByGenreId(anyLong(), any(Pageable.class))).thenReturn(Page.empty());
 
-        int genreId = 2;
+        long genreId = 2;
         int page = 0;
         int pageSize = 10;
         assertThrows(EntityNotFoundException.class, () -> moviesService.findTopByGenreId(genreId, pageSize, page));

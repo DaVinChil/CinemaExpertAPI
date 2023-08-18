@@ -25,7 +25,7 @@ public class MoviesRestControllerImplementation implements MoviesController {
     }
 
     @Override
-    public HttpEntityResponse<MovieDTO> getMovieByMovieId(int movieId) {
+    public HttpEntityResponse<MovieDTO> getMovieByMovieId(long movieId) {
         return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findMovieByMovieId(movieId)));
     }
 
@@ -50,22 +50,22 @@ public class MoviesRestControllerImplementation implements MoviesController {
     }
 
     @Override
-    public HttpEntityResponse<List<MovieDTO>> getTopMoviesByGenreId(int genreId, int pageSize, int page) {
+    public HttpEntityResponse<List<MovieDTO>> getTopMoviesByGenreId(long genreId, int pageSize, int page) {
         return new HttpEntityResponse<>(convertMovieToMovieDTO(moviesService.findTopByGenreId(genreId, pageSize, page)));
     }
 
     @Override
-    public HttpEntityResponse<List<PersonDTO>> getDirectorsByMovieId(int movieId) {
+    public HttpEntityResponse<List<PersonDTO>> getDirectorsByMovieId(long movieId) {
         return null;
     }
 
     @Override
-    public HttpEntityResponse<List<PersonDTO>> getWritersByMovieId(int movieId) {
+    public HttpEntityResponse<List<PersonDTO>> getWritersByMovieId(long movieId) {
         return null;
     }
 
     @Override
-    public HttpEntityResponse<List<PersonDTO>> getActorsByMovieId(int movieId) {
+    public HttpEntityResponse<List<PersonDTO>> getActorsByMovieId(long movieId) {
         return null;
     }
 

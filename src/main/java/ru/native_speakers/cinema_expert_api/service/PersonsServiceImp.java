@@ -43,7 +43,7 @@ public class PersonsServiceImp implements PersonsService {
     }
 
     @Override
-    public Person getPersonById(int id) {
+    public Person getPersonByPersonId(long id) {
         return personsRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No person by given id"));
     }
 

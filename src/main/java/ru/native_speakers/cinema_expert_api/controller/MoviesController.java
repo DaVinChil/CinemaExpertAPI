@@ -17,7 +17,7 @@ public interface MoviesController {
     @GetMapping("/{movieId}")
     HttpEntityResponse<MovieDTO> getMovieByMovieId(@PathVariable("movieId")
                                                    @Min(value = 1, message = "Movie id cannot be less that 1")
-                                                   int movieId);
+                                                   long movieId);
 
     @GetMapping("/by-title/{title}")
     HttpEntityResponse<MovieDTO> getMovieByMovieTitle(@PathVariable(name = "title") String movieTitle);
@@ -54,7 +54,7 @@ public interface MoviesController {
     @GetMapping("/top-by-genre-id/{id}")
     HttpEntityResponse<List<MovieDTO>> getTopMoviesByGenreId(@PathVariable(name = "id")
                                                        @Min(value = 1, message = "Genre id cannot be less than 1")
-                                                       int genreId,
+                                                       long genreId,
                                                        @RequestParam(name = "page_size")
                                                        @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                                        @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
@@ -66,17 +66,17 @@ public interface MoviesController {
     @GetMapping("/{movieId}/directors")
     HttpEntityResponse<List<PersonDTO>> getDirectorsByMovieId(@PathVariable("movieId")
                                                         @Min(value = 1, message = "Movie id cannot be less than 1")
-                                                        int movieId);
+                                                        long movieId);
 
     @GetMapping("/{movieId}/writers")
     HttpEntityResponse<List<PersonDTO>> getWritersByMovieId(@PathVariable("movieId")
                                                       @Min(value = 1, message = "Movie id cannot be less than 1")
-                                                      int movieId);
+                                                      long movieId);
 
     @GetMapping("/{movieId}/actors")
     HttpEntityResponse<List<PersonDTO>> getActorsByMovieId(@PathVariable("movieId")
                                                      @Min(value = 1, message = "Movie id cannot be less than 1")
-                                                     int movieId);
+                                                     long movieId);
 
     MovieDTO convertMovieToMovieDTO(Movie movie);
     List<MovieDTO> convertMovieToMovieDTO(List<Movie> movies);

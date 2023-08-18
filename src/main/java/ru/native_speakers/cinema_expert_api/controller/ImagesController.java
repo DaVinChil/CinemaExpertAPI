@@ -20,7 +20,7 @@ public interface ImagesController {
 
     @GetMapping("/{id}")
     HttpEntityResponse<ImageDTO> getImageByImageId(@PathVariable("id") @Min(value = 1, message = "Image id cannot be less than 1")
-                                              int id);
+                                              long imageId);
 
     @GetMapping
     HttpEntityResponse<List<ImageDTO>> getImages(@RequestParam(name = "page_size")

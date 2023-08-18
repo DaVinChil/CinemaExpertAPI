@@ -25,7 +25,7 @@ public interface GenresController {
 
     @GetMapping("/{genreId}")
     HttpEntityResponse<GenreDTO> getGenreById(@PathVariable("genreId")
-                                              @Min(value = 1, message = "Genre id cannot be less than 1") int genreId);
+                                              @Min(value = 1, message = "Genre id cannot be less than 1") long genreId);
 
     GenreDTO convertGenreToGenreDTO(Genre genre);
     List<GenreDTO> convertGenreToGenreDTO(List<Genre> genres);

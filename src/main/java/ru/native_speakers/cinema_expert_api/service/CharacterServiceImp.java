@@ -1,13 +1,10 @@
 package ru.native_speakers.cinema_expert_api.service;
 
-import jakarta.persistence.Entity;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Character;
 import ru.native_speakers.cinema_expert_api.repository.CharactersRepository;
-
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CharacterServiceImp implements CharactersService {
@@ -19,8 +16,8 @@ public class CharacterServiceImp implements CharactersService {
     }
 
     @Override
-    public Character getCharacterById(int id) {
-        return charactersRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No such character by given id"));
+    public Character getCharacterByCharacterId(long characterId) {
+        return charactersRepository.findById(characterId).orElseThrow(() -> new EntityNotFoundException("No such character by given id"));
     }
 
     @Override

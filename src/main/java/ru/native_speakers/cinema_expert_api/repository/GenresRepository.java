@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ru.native_speakers.cinema_expert_api.model.Genre;
 
 @Repository
-public interface GenresRepository extends JpaRepository<Genre, Integer> {
+public interface GenresRepository extends JpaRepository<Genre, Long> {
 }

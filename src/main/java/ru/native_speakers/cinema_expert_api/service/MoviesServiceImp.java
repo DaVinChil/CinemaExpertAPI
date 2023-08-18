@@ -16,7 +16,7 @@ public class MoviesServiceImp implements MoviesService {
     private final MoviesRepository moviesRepository;
 
     @Override
-    public Movie findMovieByMovieId(int movieId) throws EntityNotFoundException {
+    public Movie findMovieByMovieId(long movieId) throws EntityNotFoundException {
         return moviesRepository.findById(movieId).orElseThrow(() -> new EntityNotFoundException("Movie with this id not found"));
     }
 
@@ -49,7 +49,7 @@ public class MoviesServiceImp implements MoviesService {
     }
 
     @Override
-    public List<Movie> findTopByGenreId(int genreId, int pageSize, int page) throws EntityNotFoundException {
+    public List<Movie> findTopByGenreId(long genreId, int pageSize, int page) throws EntityNotFoundException {
         List<Movie> movies = moviesRepository.findAllByGenreId(genreId, PageRequest.of(page, pageSize)).getContent();
         if (movies.isEmpty()) {
             throw new EntityNotFoundException("Movies by this genre id not found");

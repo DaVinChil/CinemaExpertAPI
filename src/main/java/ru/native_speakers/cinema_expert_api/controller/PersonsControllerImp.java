@@ -3,6 +3,8 @@ package ru.native_speakers.cinema_expert_api.controller;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
 import ru.native_speakers.cinema_expert_api.dto.PersonDTO;
+import ru.native_speakers.cinema_expert_api.model.Character;
+import ru.native_speakers.cinema_expert_api.model.Movie;
 import ru.native_speakers.cinema_expert_api.model.Person;
 import ru.native_speakers.cinema_expert_api.service.PersonsService;
 
@@ -19,13 +21,13 @@ public class PersonsControllerImp implements PersonsController{
     }
 
     @Override
-    public HttpEntityResponse<PersonDTO> getPersonById(int personId) {
-        return new HttpEntityResponse<>(convertPersonToDto(personsService.getPersonById(personId)));
+    public HttpEntityResponse<PersonDTO> getPersonById(long personId) {
+        return new HttpEntityResponse<>(convertPersonToDto(personsService.getPersonByPersonId(personId)));
     }
 
     @Override
-    public HttpEntityResponse<PersonDTO> getPersonByImdbId(String personId) {
-        return new HttpEntityResponse<>(convertPersonToDto(personsService.getPersonByImdbId(personId)));
+    public HttpEntityResponse<PersonDTO> getPersonByImdbId(String personImdbId) {
+        return new HttpEntityResponse<>(convertPersonToDto(personsService.getPersonByImdbId(personImdbId)));
     }
 
     @Override
@@ -53,7 +55,7 @@ public class PersonsControllerImp implements PersonsController{
                 .deathCause(person.getDeathCause())
                 .birthday(person.getBirthday())
                 .birthPlace(person.getBirthPlace())
-                .charactersId(person.getCharacters().stream().map(character -> character.getId()).collect(Collectors.toList()))
+                .charactersId(person.getCharacters().stream().map(Character::getId).collect(Collectors.toList()))
                 .deathDate(person.getDeathDate())
                 .deathPlace(person.getDeathPlace())
                 .fullName(person.getFullName())
@@ -61,9 +63,9 @@ public class PersonsControllerImp implements PersonsController{
                 .personId(person.getId())
                 .height(person.getHeight())
                 .imdbId(person.getImdbId())
-                .moviesAsActor(person.getMoviesAsActor().stream().map(movie -> movie.getId()).collect(Collectors.toList()))
-                .moviesAsDirector(person.getMoviesAsDirector().stream().map(movie -> movie.getId()).collect(Collectors.toList()))
-                .moviesAsWriter(person.getMoviesAsWriter().stream().map(movie -> movie.getId()).collect(Collectors.toList())).build();
+                .moviesAsActor(person.getMoviesAsActor().stream().map(Movie::getId).collect(Collectors.toList()))
+                .moviesAsDirector(person.getMoviesAsDirector().stream().map(Movie::getId).collect(Collectors.toList()))
+                .moviesAsWriter(person.getMoviesAsWriter().stream().map(Movie::getId).collect(Collectors.toList())).build();
         return personDto;
     }
 

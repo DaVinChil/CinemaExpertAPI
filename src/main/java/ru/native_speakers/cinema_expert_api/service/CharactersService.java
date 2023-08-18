@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CharactersService {
-    Character getCharacterById(int id);
+    Character getCharacterByCharacterId(long characterId);
     List<Character> getCharactersByName(String name);
 }

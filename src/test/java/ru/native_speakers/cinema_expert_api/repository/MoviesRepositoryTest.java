@@ -81,11 +81,11 @@ class MoviesRepositoryTest {
 
     @Test
     void findByGenreId_AllMoviesHavingGenreWithThisId() {
-        int genreId = 2;
+        long genreId = 2;
         int page = 0;
         int pageSize = 10;
         for (Movie movie : moviesRepository.findAllByGenreId(genreId, PageRequest.of(page, pageSize)).getContent()) {
-            assertThat(movie.getGenres()).anySatisfy(genre -> Integer.compare(genre.getId(), genreId));
+            assertThat(movie.getGenres()).anySatisfy(genre -> Long.compare(genre.getId(), genreId));
         }
     }
 }

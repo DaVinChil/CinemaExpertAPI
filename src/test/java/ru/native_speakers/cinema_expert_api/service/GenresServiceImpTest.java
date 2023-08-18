@@ -29,18 +29,18 @@ class GenresServiceImpTest {
     private GenresServiceImp genresService;
 
     @Test
-    void findGenreById_ReturnsGenreClassIfRepositoryReturnsPresentOptional() {
+    void findGenreByGenreId_ReturnsGenreClassIfRepositoryReturnsPresentOptional() {
         when(genresRepository.findById(any())).thenReturn(Optional.of(genre));
 
-        int movieId = 2;
-        assertThat(genresService.findGenreById(movieId)).isInstanceOf(Genre.class);
+        long movieId = 2;
+        assertThat(genresService.findGenreByGenreId(movieId)).isInstanceOf(Genre.class);
     }
 
     @Test
-    void findGenreById_ThrowsEntityNotFoundExceptionIfRepositoryReturnsEmptyOptional() {
+    void findGenreByGenreId_ThrowsEntityNotFoundExceptionIfRepositoryReturnsEmptyOptional() {
         when(genresRepository.findById(any())).thenReturn(Optional.empty());
 
         int movieId = 1001;
-        assertThrows(EntityNotFoundException.class, () -> genresService.findGenreById(movieId));
+        assertThrows(EntityNotFoundException.class, () -> genresService.findGenreByGenreId(movieId));
     }
 }

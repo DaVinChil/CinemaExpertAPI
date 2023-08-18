@@ -8,7 +8,7 @@ public interface PersonsService {
     List<Person> getAllActors(int page, int pageSize);
     List<Person> getAllWriters(int page, int pageSize);
     List<Person> getAllDirectors(int page, int pageSize);
-    Person getPersonById(int id);
+    Person getPersonByPersonId(long personId);
     List<Person> getPersonsByName(String personName);
     Person getPersonByImdbId(String imdbId);
 }

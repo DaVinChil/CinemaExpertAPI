@@ -16,7 +16,7 @@ public class ImagesServiceImp implements ImagesService {
     private final ImagesRepository imagesRepository;
 
     @Override
-    public Image findImageByImageId(int imageId) throws EntityNotFoundException {
+    public Image findImageByImageId(long imageId) throws EntityNotFoundException {
         return imagesRepository.findById(imageId).orElseThrow(() -> new EntityNotFoundException("Image with this id not found"));
     }
 
