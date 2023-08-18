@@ -16,7 +16,7 @@ import java.util.List;
 public class MovieDTO {
 
     @NotNull(message = "MovieDTO id should not be null")
-    private int id;
+    private long id;
 
     @NotBlank(message = "Movie's imdb id should contains at least one character")
     @Pattern(regexp = "tt\\d{7}", message = "Movie's imdb id should be match: tt1234567")
@@ -41,42 +41,42 @@ public class MovieDTO {
     private ImageDTO image;
 
     @NotEmpty(message = "Movie's director's id should contains at least one director id")
-    private List<Integer> directorsId;
+    private List<Long> directorsId;
 
     @NotEmpty(message = "Movie's writer's id should contains at least one writer id")
-    private List<Integer> writersId;
+    private List<Long> writersId;
 
     @NotEmpty(message = "Movie's actor's id should contains at least one actor's id")
-    private List<Integer> actorsId;
+    private List<Long> actorsId;
 
     @NotEmpty(message = "Movie's character's id should contains at least one character's id")
-    private List<Integer> charactersId;
+    private List<Long> charactersId;
 
     @NotEmpty(message = "Movie's genre's id should contains at least one genre's id")
     private List<GenreDTO> genres;
 
-    public void addDirectorId(int directorId) {
+    public void addDirectorId(long directorId) {
         if (directorsId == null) {
             directorsId = new ArrayList<>();
         }
         directorsId.add(directorId);
     }
 
-    public void addWriterId(int writerId) {
+    public void addWriterId(long writerId) {
         if (writersId == null) {
             writersId = new ArrayList<>();
         }
         writersId.add(writerId);
     }
 
-    public void addActorId(int actorId) {
+    public void addActorId(long actorId) {
         if (actorsId == null) {
             actorsId = new ArrayList<>();
         }
         actorsId.add(actorId);
     }
 
-    public void addCharacterId(int characterId) {
+    public void addCharacterId(long characterId) {
         if (charactersId == null) {
             charactersId = new ArrayList<>();
         }

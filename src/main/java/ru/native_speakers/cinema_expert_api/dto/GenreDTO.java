@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class GenreDTO {
 
     @NotNull(message = "Genre's id should not be null")
-    private int id;
+    private long id;
 
     @NotBlank(message = "Genre's name should contains at least one character")
     private String name;

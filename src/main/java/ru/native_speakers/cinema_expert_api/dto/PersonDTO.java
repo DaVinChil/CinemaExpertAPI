@@ -17,7 +17,7 @@ import java.util.List;
 public class PersonDTO {
 
     @NotNull(message = "Person's id should not be null")
-    private int personId;
+    private long personId;
 
     @NotBlank(message = "Person's imdb id should contains at least one character")
     @Pattern(regexp = "nm\\d{7}", message = "Person's imdb id should match: nm1234567")
@@ -37,8 +37,8 @@ public class PersonDTO {
     @NotNull(message = "Person's photo should not be null")
     private ImageDTO photo;
 
-    private List<Integer> charactersId;
-    private List<Integer> moviesAsActor;
-    private List<Integer> moviesAsWriter;
-    private List<Integer> moviesAsDirector;
+    private List<Long> charactersId;
+    private List<Long> moviesAsActor;
+    private List<Long> moviesAsWriter;
+    private List<Long> moviesAsDirector;
 }

@@ -21,7 +21,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_id")
-    private int id;
+    private long id;
 
     @Column(name = "imdb_id")
     @NotBlank(message = "Movie's imdb id should contains at least one character")

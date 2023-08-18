@@ -16,7 +16,7 @@ public class Genre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "genre_id")
-    private int id;
+    private long id;
 
     @Column(name = "name")
     @NotBlank(message = "Genre's name should contains at least one character")
