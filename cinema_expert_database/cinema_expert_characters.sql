@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `characters`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `characters` (
-  `character_id` int NOT NULL AUTO_INCREMENT,
+  `character_id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `movie_id` int NOT NULL,
-  `actor_id` int NOT NULL,
+  `movie_id` bigint NOT NULL,
+  `actor_id` bigint NOT NULL,
   PRIMARY KEY (`character_id`),
   KEY `movie_id` (`movie_id`),
   KEY `actor_id` (`actor_id`),

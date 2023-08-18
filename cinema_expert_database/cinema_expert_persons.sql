@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `persons`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `persons` (
-  `person_id` int NOT NULL AUTO_INCREMENT,
+  `person_id` bigint NOT NULL AUTO_INCREMENT,
   `full_name` varchar(255) NOT NULL,
   `gender` varchar(255) DEFAULT NULL,
   `height` double DEFAULT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `persons` (
   `death_cause` varchar(255) DEFAULT NULL,
   `death_place` varchar(255) DEFAULT NULL,
   `death_date` date DEFAULT NULL,
-  `photo_id` int NOT NULL,
+  `photo_id` bigint NOT NULL,
   `imdb_id` varchar(20) NOT NULL,
   PRIMARY KEY (`person_id`),
   KEY `photo_id` (`photo_id`),
