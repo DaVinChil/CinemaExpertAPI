@@ -23,8 +23,8 @@ DROP TABLE IF EXISTS `movies_actors`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `movies_actors` (
-  `movie_id` int NOT NULL,
-  `person_id` int NOT NULL,
+  `movie_id` bigint NOT NULL,
+  `person_id` bigint NOT NULL,
   PRIMARY KEY (`movie_id`,`person_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

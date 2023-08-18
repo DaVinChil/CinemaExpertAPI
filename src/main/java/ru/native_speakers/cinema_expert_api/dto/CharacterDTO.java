@@ -14,14 +14,14 @@ import lombok.NoArgsConstructor;
 public class CharacterDTO {
 
     @NotNull(message = "Character's id should not be null")
-    private int id;
+    private long id;
 
     @NotBlank(message = "Character's name should contains at least one character")
     private String name;
 
     @NotNull(message = "Character's movie id should not be null")
-    private int movieId;
+    private long movieId;
 
     @NotNull(message = "Character's actor id should not be null")
-    private int actorId;
+    private long actorId;
 }

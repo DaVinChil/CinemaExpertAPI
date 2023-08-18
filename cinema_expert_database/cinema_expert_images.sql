@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `images`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `images` (
-  `image_id` int NOT NULL AUTO_INCREMENT,
+  `image_id` bigint NOT NULL AUTO_INCREMENT,
   `height` int NOT NULL,
   `width` int NOT NULL,
   `url` text NOT NULL,

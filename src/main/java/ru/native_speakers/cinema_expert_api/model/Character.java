@@ -17,7 +17,7 @@ public class Character {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "character_id")
-    private int id;
+    private long id;
 
     @Column(name = "name")
     @NotBlank(message = "Character's name should contains at least one character")

@@ -17,7 +17,7 @@ public interface GenresController {
     @GetMapping
     HttpEntityResponse<List<GenreDTO>> getGenres(@RequestParam(name = "page_size")
                                            @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
-                                           @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
+                                           @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
                                            int pageSize,
                                            @RequestParam(name = "page")
                                            @Min(value = 0, message = "Parameter 'page' cannot be less than 0")

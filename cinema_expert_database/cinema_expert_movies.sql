@@ -23,14 +23,14 @@ DROP TABLE IF EXISTS `movies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `movies` (
-  `movie_id` int NOT NULL AUTO_INCREMENT,
+  `movie_id` bigint NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `description` text NOT NULL,
   `running_time_in_minutes` int NOT NULL,
   `chart_rating` double NOT NULL,
   `year` int NOT NULL,
   `imdb_id` varchar(20) NOT NULL,
-  `image_id` int NOT NULL,
+  `image_id` bigint NOT NULL,
   PRIMARY KEY (`movie_id`),
   KEY `image_id` (`image_id`),
   CONSTRAINT `movies_ibfk_1` FOREIGN KEY (`image_id`) REFERENCES `images` (`image_id`) ON DELETE CASCADE

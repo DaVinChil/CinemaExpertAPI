@@ -18,7 +18,7 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "image_id")
-    private int id;
+    private long id;
 
     @Column(name = "height")
     @NotNull(message = "Image's height should not be null")
