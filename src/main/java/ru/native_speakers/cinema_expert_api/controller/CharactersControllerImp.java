@@ -28,13 +28,12 @@ public class CharactersControllerImp implements CharactersController{
     }
 
     public CharacterDTO convertCharacterToDto(Character character) {
-        CharacterDTO dto = CharacterDTO.builder()
+        return CharacterDTO.builder()
                 .actorId(character.getActor().getId())
                 .id(character.getId())
                 .movieId(character.getMovie().getId())
                 .name(character.getName())
                 .build();
-        return dto;
     }
 
     public List<CharacterDTO> convertListCharacterToDto(List<Character> characters){
