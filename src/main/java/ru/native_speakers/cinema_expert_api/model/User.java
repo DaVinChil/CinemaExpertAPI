@@ -32,4 +32,20 @@ public class User {
     @NotNull(message = "Created date cannot be null")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    @Column(name = "is_account_non_expired")
+    @NotNull
+    private boolean isAccountNonExpired;
+
+    @Column(name = "is_account_non_locked")
+    @NotNull
+    private boolean isAccountNonLocked;
+
+    @Column(name = "is_credentials_non_expired")
+    @NotNull
+    private boolean isCredentialsNonExpired;
+
+    @Column(name = "is_enabled")
+    @NotNull
+    private boolean isEnabled;
 }
