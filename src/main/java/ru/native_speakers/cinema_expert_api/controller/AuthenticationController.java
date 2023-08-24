@@ -12,11 +12,11 @@ import ru.native_speakers.cinema_expert_api.model.User;
 @RequestMapping("/auth")
 public interface AuthenticationController {
 
-    @PostMapping("/registration")
-    HttpEntityResponse<JWTAuthenticationDTO> register(@Valid @RequestBody UserDTO userDTO);
+    @PostMapping("/signup")
+    HttpEntityResponse<JWTAuthenticationDTO> signup(@Valid @RequestBody UserDTO userDTO);
 
-    @PostMapping("/login")
-    HttpEntityResponse<JWTAuthenticationDTO> login(@Valid @RequestBody AuthenticationDTO authenticationDTO);
+    @PostMapping("/signin")
+    HttpEntityResponse<JWTAuthenticationDTO> signin(@Valid @RequestBody AuthenticationDTO authenticationDTO);
 
     User convertUserDTOToUser(UserDTO userDTO);
 }

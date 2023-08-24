@@ -31,7 +31,7 @@ public class AuthenticationRestControllerImpl implements AuthenticationControlle
     }
 
     @Override
-    public HttpEntityResponse<JWTAuthenticationDTO> register(UserDTO userDTO) {
+    public HttpEntityResponse<JWTAuthenticationDTO> signup(UserDTO userDTO) {
         userService.save(convertUserDTOToUser(userDTO));
 
         JWTModel jwtModel = JWTModel.builder().username(userDTO.getUsername()).build();
@@ -42,7 +42,7 @@ public class AuthenticationRestControllerImpl implements AuthenticationControlle
     }
 
     @Override
-    public HttpEntityResponse<JWTAuthenticationDTO> login(AuthenticationDTO authenticationDTO) {
+    public HttpEntityResponse<JWTAuthenticationDTO> signin(AuthenticationDTO authenticationDTO) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 authenticationDTO.getUsername(), authenticationDTO.getPassword()
         );
