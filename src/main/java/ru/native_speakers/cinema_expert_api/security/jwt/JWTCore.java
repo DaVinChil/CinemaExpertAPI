@@ -38,8 +38,8 @@ public class JWTCore {
 
     public JWTModel retrieveValues(String token) throws JWTVerificationException {
         JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(JWTSecret))
-                .withSubject("User details")
-                .withIssuer("Cinema Expert API")
+                .withSubject(JWTSubject)
+                .withIssuer(JWTIssuer)
                 .build();
 
 

@@ -12,7 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -20,16 +19,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final JWTExceptionHandlerFilter jwtExceptionHandlerFilter;
     private final UserDetailsService userDetailsService;
     private final JWTFilter jwtFilter;
-    private final AuthenticationEntryPoint authenticationEntryPoint;
+    private final AuthenticationExceptionHandlerFilter authenticationExceptionHandlerFilter;
+    private final AccessDeniedExceptionHandlerFilter accessDeniedHandler;
 
     public SecurityConfig(@Qualifier("userServiceImpl") UserDetailsService userDetailsService,
-                          JWTFilter jwtFilter,
-                          @Qualifier("authenticationEntryPointImpl") AuthenticationEntryPoint authenticationEntryPoint) {
+                          JWTFilter jwtFilter, JWTExceptionHandlerFilter jwtExceptionHandlerFilter,
+                          AuthenticationExceptionHandlerFilter authenticationExceptionHandlerFilter,
+                          @Qualifier("accessDeniedExceptionHandlerFilter") AccessDeniedExceptionHandlerFilter accessDeniedHandler) {
         this.userDetailsService = userDetailsService;
         this.jwtFilter = jwtFilter;
-        this.authenticationEntryPoint = authenticationEntryPoint;
+        this.authenticationExceptionHandlerFilter = authenticationExceptionHandlerFilter;
+        this.jwtExceptionHandlerFilter = jwtExceptionHandlerFilter;
+        this.accessDeniedHandler = accessDeniedHandler;
     }
 
     @Bean
@@ -43,8 +47,9 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling(exceptionHandling -> exceptionHandling
-                        .authenticationEntryPoint(authenticationEntryPoint));
+                .addFilterBefore(jwtExceptionHandlerFilter, jwtFilter.getClass())
+                .addFilterBefore(authenticationExceptionHandlerFilter, jwtExceptionHandlerFilter.getClass())
+                .addFilterAfter(accessDeniedHandler, authenticationExceptionHandlerFilter.getClass());
         return http.build();
     }
 

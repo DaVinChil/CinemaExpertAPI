@@ -2,8 +2,6 @@ package ru.native_speakers.cinema_expert_api.exception;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -35,7 +33,7 @@ public class GlobalExceptionHandler {
     private HttpEntityExceptionResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
          StringBuilder errorMessage = new StringBuilder();
          e.getBindingResult().getFieldErrors().forEach(fieldError ->
-             errorMessage.append(fieldError).append(": ").append(fieldError.getDefaultMessage()).append(";\n")
+             errorMessage.append(fieldError.getDefaultMessage()).append("; ")
          );
          return new HttpEntityExceptionResponse(errorMessage.toString(), Collections.emptyList());
     }
@@ -46,15 +44,9 @@ public class GlobalExceptionHandler {
         return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
     }
 
-    @ExceptionHandler(value = UsernameNotFoundException.class)
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    private HttpEntityExceptionResponse handleUsernameNotFoundException(UsernameNotFoundException e) {
-        return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
-    }
-
-    @ExceptionHandler(value = BadCredentialsException.class)
+    @ExceptionHandler(value = RegistrationException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
-    private HttpEntityExceptionResponse handleBadCredentialsException(BadCredentialsException e) {
+    private HttpEntityExceptionResponse handleRegistrationException(RegistrationException e) {
         return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
     }
 }
