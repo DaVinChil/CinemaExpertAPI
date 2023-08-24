@@ -2,6 +2,9 @@ package ru.native_speakers.cinema_expert_api.exception;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,13 +26,35 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     private HttpEntityExceptionResponse handleConstraintViolationException(ConstraintViolationException e) {
         StringBuilder errorMessage = new StringBuilder();
-        e.getConstraintViolations().forEach(constraintViolation -> errorMessage.append(constraintViolation.getMessage()).append(";"));
+        e.getConstraintViolations().forEach(constraintViolation -> errorMessage.append(constraintViolation.getMessage()).append(";\n"));
         return new HttpEntityExceptionResponse(errorMessage.toString(), Collections.emptyList());
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    private HttpEntityExceptionResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+         StringBuilder errorMessage = new StringBuilder();
+         e.getBindingResult().getFieldErrors().forEach(fieldError ->
+             errorMessage.append(fieldError).append(": ").append(fieldError.getDefaultMessage()).append(";\n")
+         );
+         return new HttpEntityExceptionResponse(errorMessage.toString(), Collections.emptyList());
     }
 
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     private HttpEntityExceptionResponse handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+        return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
+    }
+
+    @ExceptionHandler(value = UsernameNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    private HttpEntityExceptionResponse handleUsernameNotFoundException(UsernameNotFoundException e) {
+        return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
+    }
+
+    @ExceptionHandler(value = BadCredentialsException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    private HttpEntityExceptionResponse handleBadCredentialsException(BadCredentialsException e) {
         return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
     }
 }
