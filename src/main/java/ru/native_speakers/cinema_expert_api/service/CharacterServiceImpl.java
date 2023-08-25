@@ -7,11 +7,11 @@ import ru.native_speakers.cinema_expert_api.repository.CharactersRepository;
 import java.util.List;
 
 @Service
-public class CharacterServiceImp implements CharactersService {
+public class CharacterServiceImpl implements CharactersService {
 
     private final CharactersRepository charactersRepository;
 
-    public CharacterServiceImp(CharactersRepository charactersRepository) {
+    public CharacterServiceImpl(CharactersRepository charactersRepository) {
         this.charactersRepository = charactersRepository;
     }
 

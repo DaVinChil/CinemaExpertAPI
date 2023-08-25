@@ -2,7 +2,6 @@ package ru.native_speakers.cinema_expert_api.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Movie;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MoviesServiceImp implements MoviesService {
+public class MoviesServiceImpl implements MoviesService {
 
     private final MoviesRepository moviesRepository;
 

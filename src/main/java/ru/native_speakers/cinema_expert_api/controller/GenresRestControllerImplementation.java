@@ -16,7 +16,7 @@ public class GenresRestControllerImplementation implements GenresController {
     private final GenresService genresService;
     private final ModelMapper modelMapper;
 
-    public GenresRestControllerImplementation(@Qualifier(value = "genresServiceImp") GenresService genresService,
+    public GenresRestControllerImplementation(@Qualifier(value = "genresServiceImpl") GenresService genresService,
                                               ModelMapper modelMapper) {
         this.genresService = genresService;
         this.modelMapper = modelMapper;

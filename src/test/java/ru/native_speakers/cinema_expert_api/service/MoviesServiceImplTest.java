@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
-class MoviesServiceImpTest {
+class MoviesServiceImplTest {
 
     @Mock
     private MoviesRepository moviesRepository;
@@ -29,7 +29,7 @@ class MoviesServiceImpTest {
     private Movie movie;
 
     @InjectMocks
-    private MoviesServiceImp moviesService;
+    private MoviesServiceImpl moviesService;
 
     @Test
     void findMovieByMovieId_ReturnsMovieClassIfRepositoryReturnsPresentOptional() {

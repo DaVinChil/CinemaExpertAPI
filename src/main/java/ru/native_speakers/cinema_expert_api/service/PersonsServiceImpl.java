@@ -8,10 +8,10 @@ import ru.native_speakers.cinema_expert_api.repository.PersonsRepository;
 import java.util.List;
 
 @Service
-public class PersonsServiceImp implements PersonsService {
+public class PersonsServiceImpl implements PersonsService {
     private final PersonsRepository personsRepository;
 
-    public PersonsServiceImp(PersonsRepository personsRepository) {
+    public PersonsServiceImpl(PersonsRepository personsRepository) {
         this.personsRepository = personsRepository;
     }
 

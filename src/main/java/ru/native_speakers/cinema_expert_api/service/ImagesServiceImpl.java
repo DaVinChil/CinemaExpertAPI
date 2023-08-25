@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ImagesServiceImp implements ImagesService {
+public class ImagesServiceImpl implements ImagesService {
 
     private final ImagesRepository imagesRepository;
 

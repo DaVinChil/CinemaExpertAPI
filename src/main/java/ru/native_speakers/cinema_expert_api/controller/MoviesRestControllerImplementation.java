@@ -18,7 +18,7 @@ public class MoviesRestControllerImplementation implements MoviesController {
     private final MoviesService moviesService;
     private final ModelMapper modelMapper;
 
-    public MoviesRestControllerImplementation(@Qualifier(value = "moviesServiceImp") MoviesService moviesService,
+    public MoviesRestControllerImplementation(@Qualifier(value = "moviesServiceImpl") MoviesService moviesService,
                                               ModelMapper modelMapper) {
         this.moviesService = moviesService;
         this.modelMapper = modelMapper;

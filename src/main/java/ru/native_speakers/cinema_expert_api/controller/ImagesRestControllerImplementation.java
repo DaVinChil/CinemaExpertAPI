@@ -17,7 +17,7 @@ public class ImagesRestControllerImplementation implements ImagesController {
     private final ImagesService imagesService;
     private final ModelMapper modelMapper;
 
-    public ImagesRestControllerImplementation(@Qualifier("imagesServiceImp") ImagesService imagesService,
+    public ImagesRestControllerImplementation(@Qualifier("imagesServiceImpl") ImagesService imagesService,
                                               ModelMapper modelMapper) {
         this.imagesService = imagesService;
         this.modelMapper = modelMapper;
