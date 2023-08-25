@@ -2,6 +2,7 @@ package ru.native_speakers.cinema_expert_api.exception_handlers;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -50,5 +51,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     private HttpEntityExceptionResponse handleRegistrationException(RegistrationException e) {
         return new HttpEntityExceptionResponse(e.getMessage(), Collections.emptyList());
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    private HttpEntityExceptionResponse handleAuthenticationException(AuthenticationException e) {
+        return new HttpEntityExceptionResponse("Incorrect username or password", Collections.emptyList());
     }
 }

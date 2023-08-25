@@ -6,10 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityExceptionResponse;
@@ -22,12 +19,6 @@ import java.util.Collections;
 public class AuthenticationExceptionHandlerFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper;
-
-    @ExceptionHandler(AuthenticationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    private HttpEntityExceptionResponse handleAuthenticationException(AuthenticationException e) {
-        return new HttpEntityExceptionResponse("Incorrect username or password", Collections.emptyList());
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
