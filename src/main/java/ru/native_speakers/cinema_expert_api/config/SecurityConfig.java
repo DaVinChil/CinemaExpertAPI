@@ -14,6 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.native_speakers.cinema_expert_api.exception_handlers.AccessDeniedExceptionHandlerFilter;
+import ru.native_speakers.cinema_expert_api.exception_handlers.AuthenticationExceptionHandlerFilter;
+import ru.native_speakers.cinema_expert_api.exception_handlers.JWTExceptionHandlerFilter;
+import ru.native_speakers.cinema_expert_api.security.jwt.JWTFilter;
 
 @Configuration
 @EnableWebSecurity

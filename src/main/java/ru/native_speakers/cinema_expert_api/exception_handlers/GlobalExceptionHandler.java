@@ -1,4 +1,4 @@
-package ru.native_speakers.cinema_expert_api.exception;
+package ru.native_speakers.cinema_expert_api.exception_handlers;
 
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityExceptionResponse;
+import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
+import ru.native_speakers.cinema_expert_api.exception.RegistrationException;
 
 import java.util.Collections;
 
@@ -24,7 +26,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     private HttpEntityExceptionResponse handleConstraintViolationException(ConstraintViolationException e) {
         StringBuilder errorMessage = new StringBuilder();
-        e.getConstraintViolations().forEach(constraintViolation -> errorMessage.append(constraintViolation.getMessage()).append(";\n"));
+        e.getConstraintViolations().forEach(constraintViolation -> errorMessage.append(constraintViolation.getMessage()).append(";"));
         return new HttpEntityExceptionResponse(errorMessage.toString(), Collections.emptyList());
     }
 
@@ -33,7 +35,7 @@ public class GlobalExceptionHandler {
     private HttpEntityExceptionResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
          StringBuilder errorMessage = new StringBuilder();
          e.getBindingResult().getFieldErrors().forEach(fieldError ->
-             errorMessage.append(fieldError.getDefaultMessage()).append("; ")
+             errorMessage.append(fieldError.getDefaultMessage()).append(";")
          );
          return new HttpEntityExceptionResponse(errorMessage.toString(), Collections.emptyList());
     }

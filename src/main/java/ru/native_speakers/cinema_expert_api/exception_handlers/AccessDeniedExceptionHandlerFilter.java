@@ -1,4 +1,4 @@
-package ru.native_speakers.cinema_expert_api.config;
+package ru.native_speakers.cinema_expert_api.exception_handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;

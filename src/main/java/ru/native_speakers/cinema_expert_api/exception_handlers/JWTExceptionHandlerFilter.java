@@ -1,44 +1,36 @@
-package ru.native_speakers.cinema_expert_api.config;
+package ru.native_speakers.cinema_expert_api.exception_handlers;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityExceptionResponse;
 
 import java.io.IOException;
 import java.util.Collections;
 
-@RestControllerAdvice
+@Component
 @RequiredArgsConstructor
-public class AuthenticationExceptionHandlerFilter extends OncePerRequestFilter {
+public class JWTExceptionHandlerFilter extends OncePerRequestFilter {
 
     private final ObjectMapper objectMapper;
-
-    @ExceptionHandler(AuthenticationException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    private HttpEntityExceptionResponse handleAuthenticationException(AuthenticationException e) {
-        return new HttpEntityExceptionResponse("Incorrect username or password", Collections.emptyList());
-    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
             filterChain.doFilter(request, response);
-        } catch (AuthenticationException e) {
+        }  catch (JWTVerificationException e) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             response.setContentType("application/json");
             response.getWriter().println(objectMapper.writeValueAsString(
-                    new HttpEntityExceptionResponse("Incorrect username or password", Collections.emptyList())
-            ));
+                    new HttpEntityExceptionResponse("Invalid JWT. Send your username and password to /auth/signup to register a new user and get JWT or" +
+                            " to /auth/signin to obtain new JWT if you are already registered", Collections.emptyList()))
+            );
         }
     }
 }

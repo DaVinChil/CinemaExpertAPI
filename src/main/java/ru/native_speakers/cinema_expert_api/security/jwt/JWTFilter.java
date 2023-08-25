@@ -1,4 +1,4 @@
-package ru.native_speakers.cinema_expert_api.config;
+package ru.native_speakers.cinema_expert_api.security.jwt;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.servlet.FilterChain;
