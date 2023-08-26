@@ -13,8 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.native_speakers.cinema_expert_api.security.jwt.JWTCore;
-import ru.native_speakers.cinema_expert_api.security.jwt.JWTModel;
 
 import java.io.IOException;
 

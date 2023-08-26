@@ -14,7 +14,7 @@ import java.util.List;
 @Validated
 public interface CharactersController {
 
-    @GetMapping("/by-id/{id}")
+    @GetMapping("/{id}")
     HttpEntityResponse<CharacterDTO> getCharacterById(@PathVariable("id")
                                                       @Min(value = 1, message = "Character's id cannot be less than 1")
                                                       long characterId);
