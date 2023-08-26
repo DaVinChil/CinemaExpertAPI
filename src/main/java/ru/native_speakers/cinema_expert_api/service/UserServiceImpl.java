@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     @Transactional
-    public void save(User user) {
+    public void save(User user) throws RegistrationException {
         if (isUserExists(user.getUsername())) {
             throw new RegistrationException("User with this username already exists");
         }

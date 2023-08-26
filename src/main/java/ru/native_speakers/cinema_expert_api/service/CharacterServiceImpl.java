@@ -16,12 +16,12 @@ public class CharacterServiceImpl implements CharactersService {
     }
 
     @Override
-    public Character getCharacterByCharacterId(long characterId) {
+    public Character getCharacterByCharacterId(long characterId) throws EntityNotFoundException {
         return charactersRepository.findById(characterId).orElseThrow(() -> new EntityNotFoundException("No such character by given id"));
     }
 
     @Override
-    public List<Character> getCharactersByName(String name) {
+    public List<Character> getCharactersByName(String name) throws EntityNotFoundException {
         List<Character> characters = charactersRepository.findByNameContains(name);
         if(characters.isEmpty()) {
             throw new EntityNotFoundException("No such character by given name");
