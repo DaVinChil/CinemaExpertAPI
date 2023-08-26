@@ -34,8 +34,12 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public List<Movie> findAllOrderByRating(int pageSize, int page) {
-        return moviesRepository.findByOrderByChartRatingDesc(PageRequest.of(page, pageSize)).getContent();
+    public List<Movie> findAllOrderByRating(int pageSize, int page) throws EntityNotFoundException {
+        List<Movie> movies = moviesRepository.findByOrderByChartRatingDesc(PageRequest.of(page, pageSize)).getContent();
+        if (movies.isEmpty()) {
+            throw new EntityNotFoundException("Movies not found");
+        }
+        return movies;
     }
 
     @Override
