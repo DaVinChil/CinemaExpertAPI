@@ -19,6 +19,8 @@
 -- Dumping events for database 'cinema_expert'
 --
 
+use cinema_expert;
+
 --
 -- Dumping routines for database 'cinema_expert'
 --

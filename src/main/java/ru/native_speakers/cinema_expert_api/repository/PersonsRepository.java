@@ -21,6 +21,18 @@ public interface PersonsRepository extends JpaRepository<Person, Long> {
     List<Person> findDirectorsByMovieId(@Param("movieId") long movieId);
 
     @Query(
+            value = "select persons.* from movies join movies_actors on movies.movie_id = movies_actors.movie_id join persons on movies_actors.person_id = persons.person_id where movies.movie_id = :movieId",
+            nativeQuery = true
+    )
+    List<Person> findActorsByMovieId(@Param("movieId") long movieId);
+
+    @Query(
+            value = "select persons.* from movies join movies_writers on movies.movie_id = movies_writers.movie_id join persons on movies_writers.person_id = persons.person_id where movies.movie_id = :movieId",
+            nativeQuery = true
+    )
+    List<Person> findWritersByMovieId(@Param("movieId") long movieId);
+
+    @Query(
             value = """
                     select persons.* from movies_actors
                     join persons on persons.person_id = movies_actors.person_id
