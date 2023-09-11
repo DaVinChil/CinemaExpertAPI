@@ -1,46 +1,30 @@
 package ru.native_speakers.cinema_expert_api.controller;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.GenreDTO;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
-import ru.native_speakers.cinema_expert_api.model.Genre;
 import ru.native_speakers.cinema_expert_api.service.GenresService;
-import java.util.ArrayList;
 import java.util.List;
+
+import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.convertGenreToGenreDTO;
 
 @RestController
 public class GenresRestControllerImplementation implements GenresController {
 
     private final GenresService genresService;
-    private final ModelMapper modelMapper;
 
-    public GenresRestControllerImplementation(@Qualifier(value = "genresServiceImpl") GenresService genresService,
-                                              ModelMapper modelMapper) {
+    public GenresRestControllerImplementation(@Qualifier(value = "genresServiceImpl") GenresService genresService) {
         this.genresService = genresService;
-        this.modelMapper = modelMapper;
     }
 
     @Override
-    public HttpEntityResponse<List<GenreDTO>> getGenres(int pageSize, int page) {
+    public HttpEntityResponse<List<GenreDTO>> findGenres(int pageSize, int page) {
         return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenres(pageSize, page)));
     }
 
     @Override
-    public HttpEntityResponse<GenreDTO> getGenreById(long genreId) {
+    public HttpEntityResponse<GenreDTO> findGenreById(long genreId) {
         return new HttpEntityResponse<>(convertGenreToGenreDTO(genresService.findGenreByGenreId(genreId)));
-    }
-
-    @Override
-    public GenreDTO convertGenreToGenreDTO(Genre genre) {
-        return modelMapper.map(genre, GenreDTO.class);
-    }
-
-    @Override
-    public List<GenreDTO> convertGenreToGenreDTO(List<Genre> genres) {
-        List<GenreDTO> genreDTOS = new ArrayList<>();
-        genres.forEach(genre -> genreDTOS.add(convertGenreToGenreDTO(genre)));
-        return genreDTOS;
     }
 }

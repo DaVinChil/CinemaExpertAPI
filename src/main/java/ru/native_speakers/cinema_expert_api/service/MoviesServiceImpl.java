@@ -5,7 +5,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
 import ru.native_speakers.cinema_expert_api.model.Movie;
+import ru.native_speakers.cinema_expert_api.model.Person;
 import ru.native_speakers.cinema_expert_api.repository.MoviesRepository;
+import ru.native_speakers.cinema_expert_api.repository.PersonsRepository;
+
 import java.util.List;
 
 @Service
@@ -13,6 +16,7 @@ import java.util.List;
 public class MoviesServiceImpl implements MoviesService {
 
     private final MoviesRepository moviesRepository;
+    private final PersonsRepository personsRepository;
 
     @Override
     public Movie findMovieByMovieId(long movieId) throws EntityNotFoundException {
@@ -61,7 +65,29 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public long getMoviesCount() {
-        return moviesRepository.count();
+    public List<Person> findActorsByMovieId(long movieId) throws EntityNotFoundException {
+        List<Person> actors = personsRepository.findActorsByMovieId(movieId);
+        if (actors.isEmpty()) {
+            throw new EntityNotFoundException("Actors by this movie id not found");
+        }
+        return actors;
+    }
+
+    @Override
+    public List<Person> findWritersByMovieId(long movieId) throws EntityNotFoundException {
+        List<Person> writers = personsRepository.findWritersByMovieId(movieId);
+        if (writers.isEmpty()) {
+            throw new EntityNotFoundException("Writers by this movie id not found");
+        }
+        return writers;
+    }
+
+    @Override
+    public List<Person> findDirectorsByMovieId(long movieId) throws EntityNotFoundException {
+        List<Person> directors = personsRepository.findDirectorsByMovieId(movieId);
+        if (directors.isEmpty()) {
+            throw new EntityNotFoundException("Directors by this movie id not found");
+        }
+        return directors;
     }
 }

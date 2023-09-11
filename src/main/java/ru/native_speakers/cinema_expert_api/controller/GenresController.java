@@ -15,7 +15,7 @@ import java.util.List;
 public interface GenresController {
 
     @GetMapping
-    HttpEntityResponse<List<GenreDTO>> getGenres(@RequestParam(name = "page_size")
+    HttpEntityResponse<List<GenreDTO>> findGenres(@RequestParam(name = "page_size")
                                            @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
                                            @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
                                            int pageSize,
@@ -24,9 +24,6 @@ public interface GenresController {
                                            int page);
 
     @GetMapping("/{genreId}")
-    HttpEntityResponse<GenreDTO> getGenreById(@PathVariable("genreId")
+    HttpEntityResponse<GenreDTO> findGenreById(@PathVariable("genreId")
                                               @Min(value = 1, message = "Genre id cannot be less than 1") long genreId);
-
-    GenreDTO convertGenreToGenreDTO(Genre genre);
-    List<GenreDTO> convertGenreToGenreDTO(List<Genre> genres);
 }

@@ -17,7 +17,7 @@ import java.util.List;
 public class PersonDTO {
 
     @NotNull(message = "Person's id should not be null")
-    private long personId;
+    private long id;
 
     @NotBlank(message = "Person's imdb id should contains at least one character")
     @Pattern(regexp = "nm\\d{7}", message = "Person's imdb id should match: nm1234567")

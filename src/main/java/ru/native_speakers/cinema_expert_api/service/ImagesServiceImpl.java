@@ -28,9 +28,4 @@ public class ImagesServiceImpl implements ImagesService {
         }
         return images;
     }
-
-    @Override
-    public long getImagesCount() {
-        return imagesRepository.count();
-    }
 }

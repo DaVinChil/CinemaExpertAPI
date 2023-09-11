@@ -3,11 +3,11 @@ package ru.native_speakers.cinema_expert_api.controller;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.CharacterDTO;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
-import ru.native_speakers.cinema_expert_api.model.Character;
 import ru.native_speakers.cinema_expert_api.service.CharactersService;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.convertCharacterToCharacterDTO;
 
 @RestController
 public class CharactersControllerImp implements CharactersController{
@@ -18,27 +18,12 @@ public class CharactersControllerImp implements CharactersController{
     }
 
     @Override
-    public HttpEntityResponse<CharacterDTO> getCharacterById(long characterId) {
-        return new HttpEntityResponse<>(convertCharacterToDto(charactersService.getCharacterByCharacterId(characterId)));
+    public HttpEntityResponse<CharacterDTO> findCharacterById(long characterId) {
+        return new HttpEntityResponse<>(convertCharacterToCharacterDTO(charactersService.getCharacterByCharacterId(characterId)));
     }
 
     @Override
-    public HttpEntityResponse<List<CharacterDTO>> getCharactersByName(String characterName) {
-        return new HttpEntityResponse<>(convertListCharacterToDto(charactersService.getCharactersByName(characterName)));
-    }
-
-    public CharacterDTO convertCharacterToDto(Character character) {
-        return CharacterDTO.builder()
-                .actorId(character.getActor().getId())
-                .id(character.getId())
-                .movieId(character.getMovie().getId())
-                .name(character.getName())
-                .build();
-    }
-
-    public List<CharacterDTO> convertListCharacterToDto(List<Character> characters){
-        List<CharacterDTO> characterDTOS = new ArrayList<>(characters.size());
-        characters.forEach(character -> characterDTOS.add(convertCharacterToDto(character)));
-        return characterDTOS;
+    public HttpEntityResponse<List<CharacterDTO>> findCharactersByName(String characterName) {
+        return new HttpEntityResponse<>(convertCharacterToCharacterDTO(charactersService.getCharactersByName(characterName)));
     }
 }

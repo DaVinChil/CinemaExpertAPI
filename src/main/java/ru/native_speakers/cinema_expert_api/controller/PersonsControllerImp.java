@@ -3,17 +3,14 @@ package ru.native_speakers.cinema_expert_api.controller;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
 import ru.native_speakers.cinema_expert_api.dto.PersonDTO;
-import ru.native_speakers.cinema_expert_api.model.Character;
-import ru.native_speakers.cinema_expert_api.model.Movie;
-import ru.native_speakers.cinema_expert_api.model.Person;
 import ru.native_speakers.cinema_expert_api.service.PersonsService;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.convertPersonToPersonDTO;
 
 @RestController
-public class PersonsControllerImp implements PersonsController{
+public class PersonsControllerImp implements PersonsController {
     private final PersonsService personsService;
 
     public PersonsControllerImp(PersonsService personsService) {
@@ -21,57 +18,32 @@ public class PersonsControllerImp implements PersonsController{
     }
 
     @Override
-    public HttpEntityResponse<PersonDTO> getPersonById(long personId) {
-        return new HttpEntityResponse<>(convertPersonToDto(personsService.getPersonByPersonId(personId)));
+    public HttpEntityResponse<PersonDTO> findPersonById(long personId) {
+        return new HttpEntityResponse<>(convertPersonToPersonDTO(personsService.getPersonByPersonId(personId)));
     }
 
     @Override
-    public HttpEntityResponse<PersonDTO> getPersonByImdbId(String personImdbId) {
-        return new HttpEntityResponse<>(convertPersonToDto(personsService.getPersonByImdbId(personImdbId)));
+    public HttpEntityResponse<PersonDTO> findPersonByImdbId(String personImdbId) {
+        return new HttpEntityResponse<>(convertPersonToPersonDTO(personsService.getPersonByImdbId(personImdbId)));
     }
 
     @Override
-    public HttpEntityResponse<List<PersonDTO>> getPersonsByName(String personName) {
-        return new HttpEntityResponse<>(convertListPersonsToDto(personsService.getPersonsByName(personName)));
+    public HttpEntityResponse<List<PersonDTO>> findPersonsByName(String personName) {
+        return new HttpEntityResponse<>(convertPersonToPersonDTO(personsService.getPersonsByName(personName)));
     }
 
     @Override
-    public HttpEntityResponse<List<PersonDTO>> getAllActors(int page, int pageSize) {
-        return new HttpEntityResponse<>(convertListPersonsToDto(personsService.getAllActors(page, pageSize)));
+    public HttpEntityResponse<List<PersonDTO>> findAllActors(int page, int pageSize) {
+        return new HttpEntityResponse<>(convertPersonToPersonDTO(personsService.getAllActors(page, pageSize)));
     }
 
     @Override
-    public HttpEntityResponse<List<PersonDTO>> getAllDirectors(int page, int pageSize) {
-        return new HttpEntityResponse<>(convertListPersonsToDto(personsService.getAllDirectors(page, pageSize)));
+    public HttpEntityResponse<List<PersonDTO>> findAllDirectors(int page, int pageSize) {
+        return new HttpEntityResponse<>(convertPersonToPersonDTO(personsService.getAllDirectors(page, pageSize)));
     }
 
     @Override
-    public HttpEntityResponse<List<PersonDTO>> getAllWriters(int page, int pageSize) {
-        return new HttpEntityResponse<>(convertListPersonsToDto(personsService.getAllWriters(page, pageSize)));
-    }
-
-    public PersonDTO convertPersonToDto(Person person){
-        PersonDTO personDto = PersonDTO.builder()
-                .deathCause(person.getDeathCause())
-                .birthday(person.getBirthday())
-                .birthPlace(person.getBirthPlace())
-                .charactersId(person.getCharacters().stream().map(Character::getId).collect(Collectors.toList()))
-                .deathDate(person.getDeathDate())
-                .deathPlace(person.getDeathPlace())
-                .fullName(person.getFullName())
-                .gender(person.getGender())
-                .personId(person.getId())
-                .height(person.getHeight())
-                .imdbId(person.getImdbId())
-                .moviesAsActor(person.getMoviesAsActor().stream().map(Movie::getId).collect(Collectors.toList()))
-                .moviesAsDirector(person.getMoviesAsDirector().stream().map(Movie::getId).collect(Collectors.toList()))
-                .moviesAsWriter(person.getMoviesAsWriter().stream().map(Movie::getId).collect(Collectors.toList())).build();
-        return personDto;
-    }
-
-    public List<PersonDTO> convertListPersonsToDto(List<Person> persons) {
-        List<PersonDTO> personDTOS = new ArrayList<>(persons.size());
-        persons.forEach(person -> personDTOS.add(convertPersonToDto(person)));
-        return personDTOS;
+    public HttpEntityResponse<List<PersonDTO>> findAllWriters(int page, int pageSize) {
+        return new HttpEntityResponse<>(convertPersonToPersonDTO(personsService.getAllWriters(page, pageSize)));
     }
 }

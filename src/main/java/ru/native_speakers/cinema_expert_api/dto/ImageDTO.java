@@ -3,6 +3,7 @@ package ru.native_speakers.cinema_expert_api.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
@@ -10,6 +11,7 @@ import org.hibernate.validator.constraints.URL;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class ImageDTO {
 
     @NotNull(message = "Image's id should not be bull")

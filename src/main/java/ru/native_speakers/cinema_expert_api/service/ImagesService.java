@@ -8,5 +8,4 @@ import java.util.List;
 public interface ImagesService {
     Image findImageByImageId(long imageId) throws EntityNotFoundException;
     List<Image> findImages(int pageSize, int page) throws EntityNotFoundException;
-    long getImagesCount();
 }

@@ -27,9 +27,4 @@ public class GenresServiceImpl implements GenresService {
     public Genre findGenreByGenreId(long genreId) throws EntityNotFoundException {
         return genresRepository.findById(genreId).orElseThrow(() -> new EntityNotFoundException("Genre with this id not found"));
     }
-
-    @Override
-    public long getGenresCount() {
-        return genresRepository.count();
-    }
 }
