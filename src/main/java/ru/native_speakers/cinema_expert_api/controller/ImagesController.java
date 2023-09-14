@@ -18,16 +18,20 @@ import java.util.List;
 public interface ImagesController {
 
     @GetMapping("/{id}")
-    HttpEntityResponse<ImageDTO> findImageByImageId(@PathVariable("id")
-                                                   @Min(value = 1, message = "Image id cannot be less than 1")
-                                              long imageId);
+    HttpEntityResponse<ImageDTO> findImageByImageId(
+            @PathVariable("id")
+            @Min(value = 1, message = "Image id cannot be less than 1")
+            long imageId
+    );
 
     @GetMapping
-    HttpEntityResponse<List<ImageDTO>> findImages(@RequestParam(name = "page_size")
-                                           @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
-                                           @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
-                                           int pageSize,
-                                           @RequestParam(name = "page")
-                                           @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
-                                           int page);
+    HttpEntityResponse<List<ImageDTO>> findImages(
+            @RequestParam(name = "page_size")
+            @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
+            @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
+            int pageSize,
+            @RequestParam(name = "page")
+            @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
+            int page
+    );
 }

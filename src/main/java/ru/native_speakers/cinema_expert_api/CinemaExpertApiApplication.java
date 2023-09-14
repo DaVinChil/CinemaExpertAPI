@@ -1,19 +1,12 @@
 package ru.native_speakers.cinema_expert_api;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class CinemaExpertApiApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CinemaExpertApiApplication.class, args);
-    }
-
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
     }
 }

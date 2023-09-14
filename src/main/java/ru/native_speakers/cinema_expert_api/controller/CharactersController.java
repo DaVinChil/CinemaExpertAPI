@@ -15,9 +15,11 @@ import java.util.List;
 public interface CharactersController {
 
     @GetMapping("/{id}")
-    HttpEntityResponse<CharacterDTO> findCharacterById(@PathVariable("id")
-                                                      @Min(value = 1, message = "Character's id cannot be less than 1")
-                                                      long characterId);
+    HttpEntityResponse<CharacterDTO> findCharacterById(
+            @PathVariable("id")
+            @Min(value = 1, message = "Character's id cannot be less than 1")
+            long characterId
+    );
 
     @GetMapping("/by-name/{name}")
     HttpEntityResponse<List<CharacterDTO>> findCharactersByName(@PathVariable("name") String characterName);
