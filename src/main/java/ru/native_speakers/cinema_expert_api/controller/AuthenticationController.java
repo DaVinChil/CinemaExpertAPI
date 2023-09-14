@@ -16,6 +16,4 @@ public interface AuthenticationController {
 
     @PostMapping("/signin")
     HttpEntityResponse<JWTAuthenticationDTO> signin(@Valid @RequestBody AuthenticationDTO authenticationDTO);
-
-    User convertUserDTOToUser(UserDTO userDTO);
 }

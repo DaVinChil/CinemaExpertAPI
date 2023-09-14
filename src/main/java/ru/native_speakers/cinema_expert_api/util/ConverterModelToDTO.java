@@ -23,7 +23,6 @@ public class ConverterModelToDTO {
                 .genres(convertGenreToGenreDTO(movie.getGenres()))
                 .charactersId(movie.getCharacters().stream().map(Character::getId).toList())
                 .build();
-
     }
 
     public static List<MovieDTO> convertMovieToMovieDTO(List<Movie> movies) {
@@ -39,7 +38,7 @@ public class ConverterModelToDTO {
                 .birthPlace(person.getBirthPlace())
                 .deathDate(person.getDeathDate())
                 .deathCause(person.getDeathCause())
-                .deathPlace(person.getDeathCause())
+                .deathPlace(person.getDeathPlace())
                 .gender(person.getGender())
                 .photo(convertImageToImageDTO(person.getPhoto()))
                 .height(person.getHeight())

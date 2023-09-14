@@ -15,37 +15,49 @@ import java.util.List;
 public interface PersonsController {
 
     @GetMapping("/{personId}")
-    HttpEntityResponse<PersonDTO> findPersonById(@PathVariable("personId")
-                                                @Min(value = 1, message = "Person id cannot be less than 1")
-                                                long personId);
+    HttpEntityResponse<PersonDTO> findPersonById(
+            @PathVariable("personId")
+            @Min(value = 1, message = "Person id cannot be less than 1")
+            long personId
+    );
 
     @GetMapping("/by-imdb-id/{personId}")
-    HttpEntityResponse<PersonDTO> findPersonByImdbId(@PathVariable("personId")
-                                                    @Pattern(regexp = "nm\\d{7}", message = "Person's imdb id should match: nm1234567")
-                                                    String personImdbId);
+    HttpEntityResponse<PersonDTO> findPersonByImdbId(
+            @PathVariable("personId")
+            @Pattern(regexp = "nm\\d{7}", message = "Person's imdb id should match: nm1234567")
+            String personImdbId
+    );
 
     @GetMapping("/by-name/{personName}")
     HttpEntityResponse<List<PersonDTO>> findPersonsByName(@PathVariable("personName") String personName);
 
     @GetMapping("/actors")
-    HttpEntityResponse<List<PersonDTO>> findAllActors(@RequestParam(name = "page_size")
-                                                     @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
-                                                     int pageSize,
-                                                     @RequestParam(name = "page")
-                                                     @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
-                                                     int page);
+    HttpEntityResponse<List<PersonDTO>> findAllActors(
+            @RequestParam(name = "page_size")
+            @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
+            int pageSize,
+            @RequestParam(name = "page")
+            @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
+            int page
+    );
+
     @GetMapping("/directors")
-    HttpEntityResponse<List<PersonDTO>> findAllDirectors(@RequestParam(name = "page_size")
-                                                        @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
-                                                        int page,
-                                                        @RequestParam(name = "page")
-                                                        @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
-                                                        int pageSize);
+    HttpEntityResponse<List<PersonDTO>> findAllDirectors(
+            @RequestParam(name = "page_size")
+            @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
+            int page,
+            @RequestParam(name = "page")
+            @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
+            int pageSize
+    );
+
     @GetMapping("/writers")
-    HttpEntityResponse<List<PersonDTO>> findAllWriters(@RequestParam(name = "page_size")
-                                                      @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
-                                                      int page,
-                                                      @RequestParam(name = "page")
-                                                      @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
-                                                      int pageSize);
+    HttpEntityResponse<List<PersonDTO>> findAllWriters(
+            @RequestParam(name = "page_size")
+            @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 1")
+            int page,
+            @RequestParam(name = "page")
+            @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
+            int pageSize
+    );
 }

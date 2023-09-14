@@ -68,6 +68,6 @@ public class Person {
     @ManyToMany(mappedBy = "writers", cascade = CascadeType.PERSIST)
     private List<Movie> moviesAsWriter;
 
-    @ManyToMany(mappedBy = "actors", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "directors", cascade = CascadeType.PERSIST)
     private List<Movie> moviesAsDirector;
 }

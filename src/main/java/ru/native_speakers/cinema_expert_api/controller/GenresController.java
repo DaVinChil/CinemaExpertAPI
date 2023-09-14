@@ -6,7 +6,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.native_speakers.cinema_expert_api.dto.GenreDTO;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
-import ru.native_speakers.cinema_expert_api.model.Genre;
 
 import java.util.List;
 
@@ -15,15 +14,20 @@ import java.util.List;
 public interface GenresController {
 
     @GetMapping
-    HttpEntityResponse<List<GenreDTO>> findGenres(@RequestParam(name = "page_size")
-                                           @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
-                                           @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
-                                           int pageSize,
-                                           @RequestParam(name = "page")
-                                           @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
-                                           int page);
+    HttpEntityResponse<List<GenreDTO>> findGenres(
+            @RequestParam(name = "page_size")
+            @Min(value = 1, message = "Parameter 'page_size' cannot be less than 1")
+            @Max(value = 100, message = "Parameter 'page_size' cannot be greater than 100")
+            int pageSize,
+            @RequestParam(name = "page")
+            @Min(value = 0, message = "Parameter 'page' cannot be less than 0")
+            int page
+    );
 
     @GetMapping("/{genreId}")
-    HttpEntityResponse<GenreDTO> findGenreById(@PathVariable("genreId")
-                                              @Min(value = 1, message = "Genre id cannot be less than 1") long genreId);
+    HttpEntityResponse<GenreDTO> findGenreById(
+            @PathVariable("genreId")
+            @Min(value = 1, message = "Genre id cannot be less than 1")
+            long genreId
+    );
 }

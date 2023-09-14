@@ -87,43 +87,4 @@ public class Movie {
     @ManyToMany(mappedBy = "movies", cascade = CascadeType.PERSIST)
     @NotEmpty(message = "Movie's genres should contains at least one genre")
     private List<Genre> genres;
-
-    public void addGenre(Genre genre) {
-        if(genres == null){
-            genres = new ArrayList<>();
-        }
-
-        genres.add(genre);
-    }
-    public void addCharacter(Character character){
-        if(characters == null){
-            characters = new ArrayList<>();
-        }
-
-        characters.add(character);
-    }
-
-    public void addActor(Person person){
-        if(actors == null){
-            actors = new ArrayList<>();
-        }
-
-        actors.add(person);
-    }
-
-    public void addDirector(Person person){
-        if(directors == null){
-            directors = new ArrayList<>();
-        }
-
-        directors.add(person);
-    }
-
-    public void addWriter(Person person){
-        if(writers == null){
-            writers = new ArrayList<>();
-        }
-
-        writers.add(person);
-    }
 }

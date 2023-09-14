@@ -44,6 +44,7 @@ public class JWTCore {
 
 
         DecodedJWT jwt = jwtVerifier.verify(token);
-        return JWTModel.builder().username(jwt.getClaim("username").asString()).build();
+        return JWTModel.builder()
+                .username(jwt.getClaim("username").asString()).build();
     }
 }

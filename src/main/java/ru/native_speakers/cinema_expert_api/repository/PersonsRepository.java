@@ -15,19 +15,34 @@ import java.util.Optional;
 public interface PersonsRepository extends JpaRepository<Person, Long> {
 
     @Query(
-            value = "select persons.* from movies join movies_directors on movies.movie_id = movies_directors.movie_id join persons on movies_directors.person_id = persons.person_id where movies.movie_id = :movieId",
+            value = """
+                    select persons.* from movies 
+                    join movies_directors on movies.movie_id = movies_directors.movie_id 
+                    join persons on movies_directors.person_id = persons.person_id 
+                    where movies.movie_id = :movieId
+                    """,
             nativeQuery = true
     )
     List<Person> findDirectorsByMovieId(@Param("movieId") long movieId);
 
     @Query(
-            value = "select persons.* from movies join movies_actors on movies.movie_id = movies_actors.movie_id join persons on movies_actors.person_id = persons.person_id where movies.movie_id = :movieId",
+            value = """     
+                    select persons.* from movies 
+                    join movies_actors on movies.movie_id = movies_actors.movie_id 
+                    join persons on movies_actors.person_id = persons.person_id 
+                    where movies.movie_id = :movieId
+                    """,
             nativeQuery = true
     )
     List<Person> findActorsByMovieId(@Param("movieId") long movieId);
 
     @Query(
-            value = "select persons.* from movies join movies_writers on movies.movie_id = movies_writers.movie_id join persons on movies_writers.person_id = persons.person_id where movies.movie_id = :movieId",
+            value = """
+                    select persons.* from movies 
+                    join movies_writers on movies.movie_id = movies_writers.movie_id 
+                    join persons on movies_writers.person_id = persons.person_id 
+                    where movies.movie_id = :movieId
+                    """,
             nativeQuery = true
     )
     List<Person> findWritersByMovieId(@Param("movieId") long movieId);
