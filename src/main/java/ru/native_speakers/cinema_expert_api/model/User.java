@@ -50,4 +50,9 @@ public class User {
     @Column(name = "is_enabled")
     @NotNull
     private boolean isEnabled;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "authorization_id", referencedColumnName = "authorization_id")
+    @NotNull
+    private UserAuthorization authorization;
 }

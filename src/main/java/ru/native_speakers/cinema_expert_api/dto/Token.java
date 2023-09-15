@@ -1,6 +1,5 @@
 package ru.native_speakers.cinema_expert_api.dto;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +11,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class JWTAuthenticationDTO {
-    @NotNull
-    private String jwt;
-
-    @NotNull
-    private Date createdAt;
+public class Token {
+    private String value;
+    private Date issuedAt;
+    private Date expiresAt;
 }

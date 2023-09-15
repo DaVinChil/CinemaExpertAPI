@@ -2,7 +2,6 @@ package ru.native_speakers.cinema_expert_api.service;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
@@ -45,6 +44,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void update(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public User findUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username).orElseThrow(() ->
+                new UsernameNotFoundException("User with this username not found")
+        );
+    }
+
+    @Override
+    public User findUserByRefreshToken(String refreshToken) throws UsernameNotFoundException {
+        return userRepository.findUserByRefreshToken(refreshToken).orElseThrow(() -> new UsernameNotFoundException("Invalid refresh token"));
     }
 
     @Override
