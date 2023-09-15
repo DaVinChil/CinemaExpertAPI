@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class PersonsServiceImpl implements PersonsService {
+
     private final PersonsRepository personsRepository;
 
     public PersonsServiceImpl(PersonsRepository personsRepository) {

@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -56,32 +55,4 @@ public class MovieDTO {
 
     @NotEmpty(message = "Movie's genre's id should contains at least one genre's id")
     private List<GenreDTO> genres;
-
-    public void addDirectorId(long directorId) {
-        if (directorsId == null) {
-            directorsId = new ArrayList<>();
-        }
-        directorsId.add(directorId);
-    }
-
-    public void addWriterId(long writerId) {
-        if (writersId == null) {
-            writersId = new ArrayList<>();
-        }
-        writersId.add(writerId);
-    }
-
-    public void addActorId(long actorId) {
-        if (actorsId == null) {
-            actorsId = new ArrayList<>();
-        }
-        actorsId.add(actorId);
-    }
-
-    public void addCharacterId(long characterId) {
-        if (charactersId == null) {
-            charactersId = new ArrayList<>();
-        }
-        charactersId.add(characterId);
-    }
 }

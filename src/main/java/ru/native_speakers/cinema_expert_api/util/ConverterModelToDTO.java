@@ -89,4 +89,11 @@ public class ConverterModelToDTO {
     public static List<GenreDTO> convertGenreToGenreDTO(List<Genre> genres) {
         return genres.stream().map(ConverterModelToDTO::convertGenreToGenreDTO).toList();
     }
+
+    public static User convertUserDTOToUser(UserDTO userDTO) {
+        return User.builder()
+                .username(userDTO.getUsername())
+                .password(userDTO.getPassword())
+                .build();
+    }
 }
