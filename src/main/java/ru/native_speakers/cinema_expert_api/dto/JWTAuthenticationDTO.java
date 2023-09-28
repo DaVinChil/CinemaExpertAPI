@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
+import ru.native_speakers.cinema_expert_api.security.Token;
 
 @Data
 @NoArgsConstructor
@@ -14,8 +13,5 @@ import java.util.Date;
 @Builder
 public class JWTAuthenticationDTO {
     @NotNull
-    private String jwt;
-
-    @NotNull
-    private Date createdAt;
+    private Token jwt;
 }

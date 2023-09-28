@@ -29,12 +29,4 @@ public class Genre {
             inverseJoinColumns = @JoinColumn(name = "movie_id")
     )
     private List<Movie> movies;
-
-    public void addMovie(Movie movie){
-        if(movies == null){
-            movies = new ArrayList<>();
-        }
-
-        movies.add(movie);
-    }
 }

@@ -11,6 +11,7 @@ import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.conv
 
 @RestController
 public class CharactersControllerImp implements CharactersController{
+
     private final CharactersService charactersService;
 
     public CharactersControllerImp(CharactersService charactersService) {

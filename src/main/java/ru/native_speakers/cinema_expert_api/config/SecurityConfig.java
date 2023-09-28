@@ -17,7 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.native_speakers.cinema_expert_api.exception_handlers.AccessDeniedExceptionHandlerFilter;
 import ru.native_speakers.cinema_expert_api.exception_handlers.AuthenticationExceptionHandlerFilter;
 import ru.native_speakers.cinema_expert_api.exception_handlers.JWTExceptionHandlerFilter;
-import ru.native_speakers.cinema_expert_api.security.jwt.JWTFilter;
+import ru.native_speakers.cinema_expert_api.security.jwt.JwtFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -25,12 +25,12 @@ public class SecurityConfig {
 
     private final JWTExceptionHandlerFilter jwtExceptionHandlerFilter;
     private final UserDetailsService userDetailsService;
-    private final JWTFilter jwtFilter;
+    private final JwtFilter jwtFilter;
     private final AuthenticationExceptionHandlerFilter authenticationExceptionHandlerFilter;
     private final AccessDeniedExceptionHandlerFilter accessDeniedHandler;
 
     public SecurityConfig(@Qualifier("userServiceImpl") UserDetailsService userDetailsService,
-                          JWTFilter jwtFilter, JWTExceptionHandlerFilter jwtExceptionHandlerFilter,
+                          JwtFilter jwtFilter, JWTExceptionHandlerFilter jwtExceptionHandlerFilter,
                           AuthenticationExceptionHandlerFilter authenticationExceptionHandlerFilter,
                           @Qualifier("accessDeniedExceptionHandlerFilter") AccessDeniedExceptionHandlerFilter accessDeniedHandler) {
         this.userDetailsService = userDetailsService;

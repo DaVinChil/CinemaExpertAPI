@@ -6,7 +6,10 @@ import ru.native_speakers.cinema_expert_api.model.Character;
 
 import java.util.List;
 
-public class ConverterModelToDTO {
+public final class ConverterModelToDTO {
+
+    private ConverterModelToDTO(){}
+
     public static MovieDTO convertMovieToMovieDTO(Movie movie) {
         return MovieDTO.builder()
                 .id(movie.getId())
@@ -88,5 +91,12 @@ public class ConverterModelToDTO {
 
     public static List<GenreDTO> convertGenreToGenreDTO(List<Genre> genres) {
         return genres.stream().map(ConverterModelToDTO::convertGenreToGenreDTO).toList();
+    }
+
+    public static User convertUserDTOToUser(UserDTO userDTO) {
+        return User.builder()
+                .username(userDTO.getUsername())
+                .password(userDTO.getPassword())
+                .build();
     }
 }
