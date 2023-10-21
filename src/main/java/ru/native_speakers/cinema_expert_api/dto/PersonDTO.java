@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class PersonDTO {
-
     @NotNull(message = "Person's id should not be null")
     private long id;
 

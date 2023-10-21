@@ -12,7 +12,6 @@ import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.conv
 
 @RestController
 public class ImagesRestControllerImplementation implements ImagesController {
-
     private final ImagesService imagesService;
 
     public ImagesRestControllerImplementation(@Qualifier("imagesServiceImpl") ImagesService imagesService) {

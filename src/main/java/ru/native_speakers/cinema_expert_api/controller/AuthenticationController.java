@@ -8,7 +8,6 @@ import ru.native_speakers.cinema_expert_api.dto.*;
 
 @RequestMapping("/auth")
 public interface AuthenticationController {
-
     @PostMapping("/signup")
     HttpEntityResponse<JWTAuthenticationDTO> signup(@Valid @RequestBody UserDTO userDTO);
 

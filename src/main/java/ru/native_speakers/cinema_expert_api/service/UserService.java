@@ -1,6 +1,5 @@
 package ru.native_speakers.cinema_expert_api.service;
 
-
 import ru.native_speakers.cinema_expert_api.exception.RegistrationException;
 import ru.native_speakers.cinema_expert_api.model.User;
 

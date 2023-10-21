@@ -1,4 +1,4 @@
-package ru.native_speakers.cinema_expert_api.security.jwt;
+package ru.native_speakers.cinema_expert_api.authentication.jwt;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
 import jakarta.servlet.FilterChain;
@@ -19,11 +19,13 @@ import java.io.IOException;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
-
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
-    public JwtFilter(JwtService jwtService, @Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
+    public JwtFilter(
+            JwtService jwtService,
+            @Qualifier("userServiceImpl") UserDetailsService userDetailsService
+    ) {
         this.jwtService = jwtService;
         this.userDetailsService = userDetailsService;
     }

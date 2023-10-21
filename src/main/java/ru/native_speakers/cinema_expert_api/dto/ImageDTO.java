@@ -13,7 +13,6 @@ import org.hibernate.validator.constraints.URL;
 @NoArgsConstructor
 @Builder
 public class ImageDTO {
-
     @NotNull(message = "Image's id should not be bull")
     private long id;
 

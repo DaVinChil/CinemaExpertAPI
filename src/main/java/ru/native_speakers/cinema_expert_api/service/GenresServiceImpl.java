@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GenresServiceImpl implements GenresService {
-
     private final GenresRepository genresRepository;
 
     @Override

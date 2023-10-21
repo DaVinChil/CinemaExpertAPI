@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.native_speakers.cinema_expert_api.security.Token;
+import ru.native_speakers.cinema_expert_api.authentication.security.Token;
 
 @Data
 @NoArgsConstructor

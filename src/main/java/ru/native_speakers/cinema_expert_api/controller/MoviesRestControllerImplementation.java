@@ -14,10 +14,9 @@ import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.conv
 
 @RestController
 public class MoviesRestControllerImplementation implements MoviesController {
-
     private final MoviesService moviesService;
 
-    public MoviesRestControllerImplementation(@Qualifier(value = "moviesServiceImpl") MoviesService moviesService) {
+    public MoviesRestControllerImplementation(@Qualifier("moviesServiceImpl") MoviesService moviesService) {
         this.moviesService = moviesService;
     }
 

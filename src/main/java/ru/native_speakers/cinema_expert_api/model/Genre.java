@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,7 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class Genre {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "genre_id")

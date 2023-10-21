@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class GenreDTO {
-
     @NotNull(message = "Genre's id should not be null")
     private long id;
 

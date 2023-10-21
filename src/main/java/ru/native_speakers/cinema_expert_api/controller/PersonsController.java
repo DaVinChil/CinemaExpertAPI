@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/persons")
 @Validated
 public interface PersonsController {
-
     @GetMapping("/{personId}")
     HttpEntityResponse<PersonDTO> findPersonById(
             @PathVariable("personId")

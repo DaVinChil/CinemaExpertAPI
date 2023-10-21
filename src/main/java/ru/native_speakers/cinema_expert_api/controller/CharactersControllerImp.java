@@ -1,5 +1,6 @@
 package ru.native_speakers.cinema_expert_api.controller;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.CharacterDTO;
 import ru.native_speakers.cinema_expert_api.dto.HttpEntityResponse;
@@ -11,20 +12,19 @@ import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.conv
 
 @RestController
 public class CharactersControllerImp implements CharactersController{
-
     private final CharactersService charactersService;
 
-    public CharactersControllerImp(CharactersService charactersService) {
+    public CharactersControllerImp(@Qualifier("charactersServiceImpl") CharactersService charactersService) {
         this.charactersService = charactersService;
     }
 
     @Override
     public HttpEntityResponse<CharacterDTO> findCharacterById(long characterId) {
-        return new HttpEntityResponse<>(convertCharacterToCharacterDTO(charactersService.getCharacterByCharacterId(characterId)));
+        return new HttpEntityResponse<>(convertCharacterToCharacterDTO(charactersService.findCharacterByCharacterId(characterId)));
     }
 
     @Override
     public HttpEntityResponse<List<CharacterDTO>> findCharactersByName(String characterName) {
-        return new HttpEntityResponse<>(convertCharacterToCharacterDTO(charactersService.getCharactersByName(characterName)));
+        return new HttpEntityResponse<>(convertCharacterToCharacterDTO(charactersService.findCharactersByName(characterName)));
     }
 }

@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/movies")
 @Validated
 public interface MoviesController {
-
     @GetMapping("/{movieId}")
     HttpEntityResponse<MovieDTO> findMovieByMovieId(
             @PathVariable("movieId")

@@ -13,7 +13,6 @@ import java.util.List;
 @RequestMapping("/characters")
 @Validated
 public interface CharactersController {
-
     @GetMapping("/{id}")
     HttpEntityResponse<CharacterDTO> findCharacterById(
             @PathVariable("id")

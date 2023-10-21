@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("/genres")
 @Validated
 public interface GenresController {
-
     @GetMapping
     HttpEntityResponse<List<GenreDTO>> findGenres(
             @RequestParam(name = "page_size")

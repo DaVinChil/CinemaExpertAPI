@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/images")
 @Validated
 public interface ImagesController {
-
     @GetMapping("/{id}")
     HttpEntityResponse<ImageDTO> findImageByImageId(
             @PathVariable("id")

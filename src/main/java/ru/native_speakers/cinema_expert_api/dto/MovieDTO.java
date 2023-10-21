@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class MovieDTO {
-
     @NotNull(message = "MovieDTO id should not be null")
     private long id;
 

@@ -17,22 +17,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.native_speakers.cinema_expert_api.exception_handlers.AccessDeniedExceptionHandlerFilter;
 import ru.native_speakers.cinema_expert_api.exception_handlers.AuthenticationExceptionHandlerFilter;
 import ru.native_speakers.cinema_expert_api.exception_handlers.JWTExceptionHandlerFilter;
-import ru.native_speakers.cinema_expert_api.security.jwt.JwtFilter;
+import ru.native_speakers.cinema_expert_api.authentication.jwt.JwtFilter;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     private final JWTExceptionHandlerFilter jwtExceptionHandlerFilter;
     private final UserDetailsService userDetailsService;
     private final JwtFilter jwtFilter;
     private final AuthenticationExceptionHandlerFilter authenticationExceptionHandlerFilter;
     private final AccessDeniedExceptionHandlerFilter accessDeniedHandler;
 
-    public SecurityConfig(@Qualifier("userServiceImpl") UserDetailsService userDetailsService,
-                          JwtFilter jwtFilter, JWTExceptionHandlerFilter jwtExceptionHandlerFilter,
-                          AuthenticationExceptionHandlerFilter authenticationExceptionHandlerFilter,
-                          @Qualifier("accessDeniedExceptionHandlerFilter") AccessDeniedExceptionHandlerFilter accessDeniedHandler) {
+    public SecurityConfig(
+            @Qualifier("userServiceImpl") UserDetailsService userDetailsService,
+            JwtFilter jwtFilter, JWTExceptionHandlerFilter jwtExceptionHandlerFilter,
+            AuthenticationExceptionHandlerFilter authenticationExceptionHandlerFilter,
+            @Qualifier("accessDeniedExceptionHandlerFilter") AccessDeniedExceptionHandlerFilter accessDeniedHandler
+    ) {
         this.userDetailsService = userDetailsService;
         this.jwtFilter = jwtFilter;
         this.authenticationExceptionHandlerFilter = authenticationExceptionHandlerFilter;
@@ -46,10 +47,12 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**").permitAll()
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()
+                )
                 .authenticationProvider(daoAuthenticationProvider())
                 .sessionManagement(sessionManagement -> sessionManagement
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtExceptionHandlerFilter, jwtFilter.getClass())
                 .addFilterBefore(authenticationExceptionHandlerFilter, jwtExceptionHandlerFilter.getClass())

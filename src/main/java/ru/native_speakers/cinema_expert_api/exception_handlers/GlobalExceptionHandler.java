@@ -16,7 +16,6 @@ import java.util.Collections;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
     @ExceptionHandler(value = EntityNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     private HttpEntityExceptionResponse handleEntityNotFoundException(EntityNotFoundException e) {

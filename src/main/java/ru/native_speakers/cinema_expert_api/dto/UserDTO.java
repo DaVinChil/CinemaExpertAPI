@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UserDTO {
-
     @NotBlank(message = "Username cannot be empty")
     @Size(min = 4, message = "Username should have at least 4 characters")
     private String username;

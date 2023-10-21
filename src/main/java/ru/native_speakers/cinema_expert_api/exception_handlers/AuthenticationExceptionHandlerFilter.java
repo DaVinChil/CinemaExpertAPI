@@ -18,7 +18,6 @@ import java.util.Collections;
 @RestControllerAdvice
 @RequiredArgsConstructor
 public class AuthenticationExceptionHandlerFilter extends OncePerRequestFilter {
-
     private final ObjectMapper objectMapper;
 
     @Override

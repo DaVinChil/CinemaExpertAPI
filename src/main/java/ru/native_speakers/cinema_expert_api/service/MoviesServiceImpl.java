@@ -14,7 +14,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class MoviesServiceImpl implements MoviesService {
-
     private final MoviesRepository moviesRepository;
     private final PersonsRepository personsRepository;
 

@@ -5,8 +5,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.RestController;
 import ru.native_speakers.cinema_expert_api.dto.*;
-import ru.native_speakers.cinema_expert_api.security.Token;
-import ru.native_speakers.cinema_expert_api.security.jwt.JwtService;
+import ru.native_speakers.cinema_expert_api.authentication.security.Token;
+import ru.native_speakers.cinema_expert_api.authentication.jwt.JwtService;
 import ru.native_speakers.cinema_expert_api.service.UserService;
 import ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO;
 
@@ -14,14 +14,15 @@ import java.util.Map;
 
 @RestController
 public class AuthenticationRestControllerImpl implements AuthenticationController {
-
     private final AuthenticationProvider authenticationProvider;
     private final UserService userService;
     private final JwtService jwtService;
 
-    public AuthenticationRestControllerImpl(@Qualifier("userServiceImpl") UserService userService,
-                                            JwtService jwtService,
-                                            @Qualifier("daoAuthenticationProvider") AuthenticationProvider authenticationProvider) {
+    public AuthenticationRestControllerImpl(
+            @Qualifier("userServiceImpl") UserService userService,
+            JwtService jwtService,
+            @Qualifier("daoAuthenticationProvider") AuthenticationProvider authenticationProvider
+    ) {
         this.userService = userService;
         this.jwtService = jwtService;
         this.authenticationProvider = authenticationProvider;
@@ -30,7 +31,6 @@ public class AuthenticationRestControllerImpl implements AuthenticationControlle
     @Override
     public HttpEntityResponse<JWTAuthenticationDTO> signup(UserDTO userDTO) {
         userService.save(ConverterModelToDTO.convertUserDTOToUser(userDTO));
-
         Token jwt = jwtService.generateToken(
                 Map.of("username", userDTO.getUsername())
         );

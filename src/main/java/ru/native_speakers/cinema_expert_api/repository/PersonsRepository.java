@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Repository
 public interface PersonsRepository extends JpaRepository<Person, Long> {
-
     @Query(
             value = """
                     select persons.* from movies 

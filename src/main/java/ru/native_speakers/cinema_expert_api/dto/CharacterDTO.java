@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class CharacterDTO {
-
     @NotNull(message = "Character's id should not be null")
     private long id;
 

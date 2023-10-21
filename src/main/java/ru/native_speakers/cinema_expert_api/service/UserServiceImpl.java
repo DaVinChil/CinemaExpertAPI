@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.native_speakers.cinema_expert_api.exception.RegistrationException;
 import ru.native_speakers.cinema_expert_api.model.User;
 import ru.native_speakers.cinema_expert_api.repository.UserRepository;
-import ru.native_speakers.cinema_expert_api.security.UserDetailsImpl;
+import ru.native_speakers.cinema_expert_api.authentication.security.UserDetailsImpl;
 
 import java.util.Date;
 import java.util.Optional;
@@ -18,7 +18,6 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService, UserDetailsService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -50,7 +49,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
-
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("User with this username not found");
         }

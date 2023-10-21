@@ -11,10 +11,9 @@ import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.conv
 
 @RestController
 public class GenresRestControllerImplementation implements GenresController {
-
     private final GenresService genresService;
 
-    public GenresRestControllerImplementation(@Qualifier(value = "genresServiceImpl") GenresService genresService) {
+    public GenresRestControllerImplementation(@Qualifier("genresServiceImpl") GenresService genresService) {
         this.genresService = genresService;
     }
 

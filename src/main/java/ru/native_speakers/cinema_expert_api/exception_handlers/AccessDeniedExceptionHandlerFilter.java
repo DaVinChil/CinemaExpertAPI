@@ -18,7 +18,6 @@ import java.util.Collections;
 @Component
 @RequiredArgsConstructor
 public class AccessDeniedExceptionHandlerFilter extends OncePerRequestFilter {
-
     private final ObjectMapper objectMapper;
 
     @Override

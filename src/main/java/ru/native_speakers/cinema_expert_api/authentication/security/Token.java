@@ -1,4 +1,4 @@
-package ru.native_speakers.cinema_expert_api.security;
+package ru.native_speakers.cinema_expert_api.authentication.security;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
