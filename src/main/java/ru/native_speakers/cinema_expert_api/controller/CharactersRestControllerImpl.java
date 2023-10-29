@@ -11,10 +11,10 @@ import java.util.List;
 import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.convertCharacterToCharacterDTO;
 
 @RestController
-public class CharactersControllerImpl implements CharactersController{
+public class CharactersRestControllerImpl implements CharactersController{
     private final CharactersService charactersService;
 
-    public CharactersControllerImpl(@Qualifier("charactersServiceImpl") CharactersService charactersService) {
+    public CharactersRestControllerImpl(@Qualifier("charactersServiceImpl") CharactersService charactersService) {
         this.charactersService = charactersService;
     }
 
