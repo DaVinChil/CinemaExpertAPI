@@ -11,10 +11,10 @@ import java.util.List;
 import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.convertImageToImageDTO;
 
 @RestController
-public class ImagesRestControllerImplementation implements ImagesController {
+public class ImagesRestControllerImpl implements ImagesController {
     private final ImagesService imagesService;
 
-    public ImagesRestControllerImplementation(@Qualifier("imagesServiceImpl") ImagesService imagesService) {
+    public ImagesRestControllerImpl(@Qualifier("imagesServiceImpl") ImagesService imagesService) {
         this.imagesService = imagesService;
     }
 

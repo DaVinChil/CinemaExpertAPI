@@ -13,10 +13,10 @@ import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.conv
 import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.convertPersonToPersonDTO;
 
 @RestController
-public class MoviesRestControllerImplementation implements MoviesController {
+public class MoviesRestControllerImpl implements MoviesController {
     private final MoviesService moviesService;
 
-    public MoviesRestControllerImplementation(@Qualifier("moviesServiceImpl") MoviesService moviesService) {
+    public MoviesRestControllerImpl(@Qualifier("moviesServiceImpl") MoviesService moviesService) {
         this.moviesService = moviesService;
     }
 

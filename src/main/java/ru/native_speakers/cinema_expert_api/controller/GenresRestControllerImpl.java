@@ -10,10 +10,10 @@ import java.util.List;
 import static ru.native_speakers.cinema_expert_api.util.ConverterModelToDTO.convertGenreToGenreDTO;
 
 @RestController
-public class GenresRestControllerImplementation implements GenresController {
+public class GenresRestControllerImpl implements GenresController {
     private final GenresService genresService;
 
-    public GenresRestControllerImplementation(@Qualifier("genresServiceImpl") GenresService genresService) {
+    public GenresRestControllerImpl(@Qualifier("genresServiceImpl") GenresService genresService) {
         this.genresService = genresService;
     }
 

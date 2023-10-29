@@ -52,7 +52,7 @@ public class JwtFilter extends OncePerRequestFilter {
             );
             SecurityContextHolder.getContext().setAuthentication(authToken);
         } else if (!request.getRequestURL().toString().contains("/auth")) {
-            throw new AccessDeniedException("Header 'Authorization' should contain JWT");
+            throw new AccessDeniedException("Header 'Authorization' must contain JWT");
         }
         filterChain.doFilter(request, response);
     }
