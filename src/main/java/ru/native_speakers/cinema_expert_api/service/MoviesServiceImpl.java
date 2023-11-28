@@ -1,6 +1,7 @@
 package ru.native_speakers.cinema_expert_api.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ru.native_speakers.cinema_expert_api.exception.EntityNotFoundException;
